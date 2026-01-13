@@ -26,12 +26,19 @@ export const uploadReferenceAudio = (payload: {
   file_url?: string
   duration?: number
   format?: string
-}) =>
-  request<UploadResponse>({
+}) => {
+  const formData = new FormData()
+  if (payload.file_url) formData.append('file_url', payload.file_url)
+  if (payload.duration !== undefined) formData.append('duration', String(payload.duration))
+  if (payload.format) formData.append('format', payload.format)
+
+  return request<UploadResponse>({
     url: '/music/uploads',
     method: 'POST',
-    data: payload
+    data: formData,
+    header: { 'Content-Type': 'multipart/form-data' }
   })
+}
 
 export const savePrompt = (payload: {
   title: string
