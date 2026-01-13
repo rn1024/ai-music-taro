@@ -1,4 +1,5 @@
-import { View, Text } from '@tarojs/components'
+import { View, Text, Image } from '@tarojs/components'
+import { checkIcon } from '../../assets/icons'
 import './index.scss'
 
 interface Step {
@@ -27,7 +28,7 @@ export default function StepIndicator({
               } ${index === currentStep ? 'active' : ''}`}
             >
               {index < currentStep ? (
-                <Text className="step-indicator__check">✓</Text>
+                <Image src={checkIcon} className="step-indicator__check" />
               ) : (
                 <Text className="step-indicator__number">{index + 1}</Text>
               )}

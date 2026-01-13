@@ -1,10 +1,11 @@
-import { View, Text, ScrollView } from '@tarojs/components'
+import { View, Text, ScrollView, Image } from '@tarojs/components'
 import Taro, { useDidShow } from '@tarojs/taro'
 import { useState } from 'react'
 import { GlassCard, PrimaryButton } from '../../components'
 import { getCreditBalance } from '../../services/credits'
 import { getCurrentUser } from '../../services/user'
 import type { UserProfile } from '../../types'
+import { userIcon, creditCardIcon, giftIcon, circleHelpIcon, settingsIcon, puzzleIcon } from '../../assets/icons'
 import './index.scss'
 
 interface MenuItemProps {
@@ -21,7 +22,7 @@ const MenuItem = ({ icon, label, onClick }: MenuItemProps) => (
   >
     <View className="menu-left">
       <View className="menu-icon-wrap">
-        <Text className="menu-icon">{icon}</Text>
+        <Image src={icon} className="menu-icon" />
       </View>
       <Text className="menu-label">{label}</Text>
     </View>
@@ -69,7 +70,7 @@ export default function Me() {
         <View className="user-card">
           <View className="avatar-wrap">
             <View className="avatar">
-              <Text className="avatar-icon">👤</Text>
+              <Image src={userIcon} className="avatar-icon" />
             </View>
             {user?.isPro ? (
               <View className="pro-badge">
@@ -104,11 +105,11 @@ export default function Me() {
 
         {/* Menu List - 原版 */}
         <View className="menu-list">
-          <MenuItem icon="💳" label="消费记录" onClick={() => handleMenuClick('消费记录')} />
-          <MenuItem icon="🎁" label="兑换码兑换" onClick={handleRedeem} />
-          <MenuItem icon="❓" label="使用指引" onClick={() => handleMenuClick('使用指引')} />
-          <MenuItem icon="⚙️" label="设置" onClick={() => handleMenuClick('设置')} />
-          <MenuItem icon="🧩" label="组件规范 (Dev)" onClick={() => handleMenuClick('组件规范')} />
+          <MenuItem icon={creditCardIcon} label="消费记录" onClick={() => handleMenuClick('消费记录')} />
+          <MenuItem icon={giftIcon} label="兑换码兑换" onClick={handleRedeem} />
+          <MenuItem icon={circleHelpIcon} label="使用指引" onClick={() => handleMenuClick('使用指引')} />
+          <MenuItem icon={settingsIcon} label="设置" onClick={() => handleMenuClick('设置')} />
+          <MenuItem icon={puzzleIcon} label="组件规范 (Dev)" onClick={() => handleMenuClick('组件规范')} />
         </View>
       </ScrollView>
     </View>

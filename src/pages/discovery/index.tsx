@@ -5,6 +5,7 @@ import { GlassCard } from '../../components'
 import { getCategories, getHotSamples } from '../../services/discovery'
 import { shareMusic } from '../../services/music'
 import type { Category, HotSample } from '../../types'
+import { sparklesIcon, musicIcon, trendingUpIcon, playIcon, heartIcon, share2Icon } from '../../assets/icons'
 import './index.scss'
 
 const DEFAULT_CATEGORIES: Category[] = [
@@ -100,7 +101,7 @@ export default function Discovery() {
       <View className="discovery-header">
         <Text className="header-title">发现</Text>
         <View className="header-icon-wrap">
-          <Text className="header-icon">✦</Text>
+          <Image src={sparklesIcon} className="header-icon" />
         </View>
       </View>
 
@@ -120,7 +121,7 @@ export default function Discovery() {
             <Text className="banner-title">AI 音乐创作挑战赛</Text>
             <Text className="banner-desc">使用 "Cyberpunk" 风格创作，赢取 Pro 会员</Text>
             <View className="banner-btn" onClick={handleNavigateToCreate}>
-              <Text className="btn-icon">♪</Text>
+              <Image src={musicIcon} className="btn-icon" />
               <Text className="btn-text">立即参与</Text>
             </View>
           </View>
@@ -151,7 +152,7 @@ export default function Discovery() {
       <View className="samples-section">
         <View className="section-header">
           <View className="section-title-wrap">
-            <Text className="trending-icon">📈</Text>
+            <Image src={trendingUpIcon} className="trending-icon" />
             <Text className="section-title">热门作品</Text>
           </View>
           <View className="view-more">
@@ -167,7 +168,7 @@ export default function Discovery() {
               <View className="sample-cover">
                 <Image src={sample.image} mode="aspectFill" className="cover-image" />
                 <View className="play-overlay">
-                  <Text className="play-icon">▶</Text>
+                  <Image src={playIcon} className="play-icon" />
                 </View>
               </View>
 
@@ -180,7 +181,7 @@ export default function Discovery() {
                 <Text className="sample-author">@{sample.author}</Text>
                 <View className="info-bottom">
                   <View className="sample-likes">
-                    <Text className="heart-icon">♥</Text>
+                    <Image src={heartIcon} className="heart-icon" />
                     <Text className="likes-count">{sample.likes}</Text>
                   </View>
                   <View className="sample-tag">
@@ -191,7 +192,7 @@ export default function Discovery() {
 
               {/* 分享按钮 */}
               <View className="share-btn" onClick={() => handleShare(sample.id)}>
-                <Text className="share-icon">↗</Text>
+                <Image src={share2Icon} className="share-icon" />
               </View>
             </GlassCard>
           ))}

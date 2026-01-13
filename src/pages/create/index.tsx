@@ -1,9 +1,10 @@
-import { View, Text, Textarea, Input, ScrollView, Picker } from '@tarojs/components'
+import { View, Text, Textarea, Input, ScrollView, Picker, Image } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { useState } from 'react'
 import { ModeSwitcher, PrimaryButton, CollapsibleSection } from '../../components'
 import { createMusic, savePrompt, uploadReferenceAudio } from '../../services/music'
 import type { CreateMode, MusicCreateRequest } from '../../types'
+import { uploadIcon, micIcon, musicIcon, trash2Icon, userIcon, copyIcon, rotateCcwIcon, saveIcon, sparklesIcon } from '../../assets/icons'
 import './index.scss'
 
 // 原版灵感标签 - 完全保留
@@ -165,11 +166,11 @@ export default function Create() {
         {/* Buttons Row - 原版: 上传音频 + 录制歌词 */}
         <View className="buttons-row">
           <View className="action-btn" onClick={handleUploadAudio}>
-            <Text className="btn-icon">↑</Text>
+            <Image src={uploadIcon} className="btn-icon" />
             <Text className="btn-text">上传音频</Text>
           </View>
           <View className="action-btn" onClick={() => Taro.showToast({ title: '功能开发中', icon: 'none' })}>
-            <Text className="btn-icon">🎤</Text>
+            <Image src={micIcon} className="btn-icon" />
             <Text className="btn-text">录制歌词</Text>
           </View>
         </View>
@@ -178,7 +179,7 @@ export default function Create() {
         <View className="instrumental-card">
           <View className="instrumental-left">
             <View className={`instrumental-icon ${isInstrumental ? 'active' : ''}`}>
-              <Text>♪</Text>
+              <Image src={musicIcon} className="instrumental-icon-img" />
             </View>
             <Text className="instrumental-label">纯音乐模式</Text>
           </View>
@@ -205,7 +206,7 @@ export default function Create() {
         {/* Actions - 原版 */}
         <View className="form-actions">
           <View className="clear-btn" onClick={handleClearBasic}>
-            <Text className="clear-icon">🗑</Text>
+            <Image src={trash2Icon} className="clear-icon" />
             <Text className="clear-text">清空所有输入</Text>
           </View>
           <PrimaryButton
@@ -228,15 +229,15 @@ export default function Create() {
         {/* Top Action Buttons - 原版: 3列按钮 */}
         <View className="top-actions">
           <View className="top-action-btn" onClick={handleUploadAudio}>
-            <Text className="action-icon">↑</Text>
+            <Image src={uploadIcon} className="action-icon" />
             <Text className="action-label">上传音频</Text>
           </View>
           <View className="top-action-btn" onClick={() => Taro.showToast({ title: '功能开发中', icon: 'none' })}>
-            <Text className="action-icon">👤</Text>
+            <Image src={userIcon} className="action-icon" />
             <Text className="action-label">角色</Text>
           </View>
           <View className="top-action-btn" onClick={() => Taro.showToast({ title: '功能开发中', icon: 'none' })}>
-            <Text className="action-icon">📋</Text>
+            <Image src={copyIcon} className="action-icon" />
             <Text className="action-label">灵感库</Text>
           </View>
         </View>
@@ -265,15 +266,15 @@ export default function Create() {
             />
             <View className="lyrics-actions">
               <View className="action-link">
-                <Text className="link-icon">↺</Text>
+                <Image src={rotateCcwIcon} className="link-icon" />
                 <Text>撤销</Text>
               </View>
               <View className="action-link" onClick={handleSavePrompt}>
-                <Text className="link-icon">💾</Text>
+                <Image src={saveIcon} className="link-icon" />
                 <Text>保存提示</Text>
               </View>
               <View className="action-link danger" onClick={() => setLyrics('')}>
-                <Text className="link-icon">🗑</Text>
+                <Image src={trash2Icon} className="link-icon" />
                 <Text>清空</Text>
               </View>
             </View>
@@ -295,7 +296,7 @@ export default function Create() {
               onInput={(e) => setStyles(e.detail.value)}
             />
             <View className="upsample-btn">
-              <Text className="upsample-icon">✦</Text>
+              <Image src={sparklesIcon} className="upsample-icon" />
               <Text className="upsample-text">风格增强 (Upsample)</Text>
             </View>
             <View className="style-tags">
@@ -413,7 +414,7 @@ export default function Create() {
         {/* Actions - 原版 */}
         <View className="form-actions">
           <View className="clear-btn" onClick={handleClearPro}>
-            <Text className="clear-icon">🗑</Text>
+            <Image src={trash2Icon} className="clear-icon" />
             <Text className="clear-text">清空所有输入</Text>
           </View>
           <PrimaryButton

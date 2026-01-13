@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { GlassCard } from '../../components'
 import { deleteMusic, getMusicHistory } from '../../services/music'
 import type { MusicHistoryItem } from '../../types'
+import { searchIcon, clockIcon, playIcon, ellipsisIcon } from '../../assets/icons'
 import './index.scss'
 
 const FILTERS = ['全部', '成功', '生成中', '失败']
@@ -88,7 +89,7 @@ export default function History() {
       <ScrollView className="history-scroll" scrollY>
         {/* Search Bar */}
         <View className="search-bar">
-          <Text className="search-icon">🔍</Text>
+          <Image src={searchIcon} className="search-icon" />
           <Input
             type="text"
             placeholder="搜索历史记录..."
@@ -126,7 +127,7 @@ export default function History() {
                   <Image src={item.cover} mode="aspectFill" className="cover-image" />
                 ) : (
                   <View className="cover-placeholder">
-                    <Text className="cover-icon">🕐</Text>
+                    <Image src={clockIcon} className="cover-icon" />
                   </View>
                 )}
                 <View className="cover-overlay" />
@@ -145,10 +146,10 @@ export default function History() {
 
               <View className="item-actions">
                 <View className="action-btn play" onClick={(e) => handlePlay(e, item)}>
-                  <Text>▶</Text>
+                  <Image src={playIcon} className="action-icon" />
                 </View>
                 <View className="action-btn more" onClick={(e) => handleMore(e, item)}>
-                  <Text>⋯</Text>
+                  <Image src={ellipsisIcon} className="action-icon" />
                 </View>
               </View>
             </GlassCard>

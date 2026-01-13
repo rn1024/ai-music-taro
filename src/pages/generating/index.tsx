@@ -1,8 +1,9 @@
-import { View, Text } from '@tarojs/components'
+import { View, Text, Image } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { useEffect, useState } from 'react'
 import { getMusicTask } from '../../services/music'
 import type { MusicTask } from '../../types'
+import { minimizeIcon, xIcon, checkIcon } from '../../assets/icons'
 import './index.scss'
 
 const STEPS = [
@@ -94,10 +95,10 @@ export default function Generating() {
       {/* Header Actions - 原版: Minimize + Close */}
       <View className="header-actions">
         <View className="action-btn" onClick={handleMinimize}>
-          <Text className="action-icon">−</Text>
+          <Image src={minimizeIcon} className="action-icon" />
         </View>
         <View className="action-btn close" onClick={handleCancel}>
-          <Text className="action-icon">×</Text>
+          <Image src={xIcon} className="action-icon" />
         </View>
       </View>
 
@@ -132,7 +133,7 @@ export default function Generating() {
                 <View className="step-indicator">
                   {isCompleted ? (
                     <View className="step-check">
-                      <Text>✓</Text>
+                      <Image src={checkIcon} className="step-check-icon" />
                     </View>
                   ) : isActive ? (
                     <View className="step-spinner" />

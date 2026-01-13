@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { GlassCard, PrimaryButton } from '../../components'
 import { downloadMusic, getMusicResult, getMusicVariants, shareMusic } from '../../services/music'
 import type { MusicResult, MusicVariant } from '../../types'
+import { playIcon, pauseIcon, downloadIcon, share2Icon, copyIcon, ellipsisIcon } from '../../assets/icons'
 import './index.scss'
 
 const formatDuration = (seconds?: number) => {
@@ -109,7 +110,7 @@ export default function Result() {
             />
             <View className="hero-overlay" onClick={handlePlay}>
               <View className="play-btn">
-                <Text className="play-icon">{isPlaying ? '❚❚' : '▶'}</Text>
+                <Image src={isPlaying ? pauseIcon : playIcon} className="play-icon" />
               </View>
             </View>
 
@@ -133,19 +134,19 @@ export default function Result() {
         {/* Actions Grid - 原版: 4列 */}
         <View className="actions-grid">
           <View className="action-item" onClick={handleDownload}>
-            <Text className="action-icon">↓</Text>
+            <Image src={downloadIcon} className="action-icon" />
             <Text className="action-label">下载</Text>
           </View>
           <View className="action-item" onClick={handleShare}>
-            <Text className="action-icon">↗</Text>
+            <Image src={share2Icon} className="action-icon" />
             <Text className="action-label">分享</Text>
           </View>
           <View className="action-item" onClick={handleCopyPrompt}>
-            <Text className="action-icon">📋</Text>
+            <Image src={copyIcon} className="action-icon" />
             <Text className="action-label">复制Prompt</Text>
           </View>
           <View className="action-item">
-            <Text className="action-icon">⋯</Text>
+            <Image src={ellipsisIcon} className="action-icon" />
             <Text className="action-label">更多</Text>
           </View>
         </View>
@@ -164,7 +165,7 @@ export default function Result() {
                   <Text className="variant-desc">{formatDuration(variant.duration)}</Text>
                 </View>
                 <View className="variant-play">
-                  <Text>▶</Text>
+                  <Image src={playIcon} className="variant-play-icon" />
                 </View>
               </GlassCard>
             ))
