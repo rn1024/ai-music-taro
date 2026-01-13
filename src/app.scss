@@ -1,0 +1,25 @@
+// 引入主题变量与公共样式
+@use './styles/theme.scss' as *;
+@use './styles/common.scss' as *;
+
+// 引入 @creatoria/taro-ui 样式
+@import '@creatoria/taro-ui/dist/styles/index.css';
+
+// 页面基础样式
+page {
+  background-color: $color-page;
+  color: $color-text-primary;
+  font-family: $font-family-body;
+  min-height: 100vh;
+}
+
+// 隐藏滚动条
+::-webkit-scrollbar {
+  display: none;
+}
+
+// 安全区域适配
+.safe-area-bottom {
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}

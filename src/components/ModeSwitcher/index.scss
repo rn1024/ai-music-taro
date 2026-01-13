@@ -1,0 +1,50 @@
+@use '../../styles/theme.scss' as *;
+
+.mode-switcher {
+  display: flex;
+  background: $color-glass-surface;
+  border-radius: $border-radius-full;
+  padding: 8rpx;
+  gap: 8rpx;
+
+  &__tab {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8rpx;
+    height: 72rpx;
+    border-radius: $border-radius-full;
+    transition: all 0.3s ease;
+
+    &.active {
+      background: linear-gradient(135deg, $color-brand-primary 0%, $color-brand-secondary 100%);
+
+      .mode-switcher__label {
+        color: $color-text-primary;
+        font-weight: $font-weight-semibold;
+      }
+    }
+  }
+
+  &__label {
+    font-size: $font-size-md;
+    color: $color-text-secondary;
+    transition: all 0.3s ease;
+  }
+
+  &__badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rpx 12rpx;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: $border-radius-sm;
+
+    text {
+      font-size: 20rpx;
+      font-weight: $font-weight-bold;
+      color: $color-text-primary;
+    }
+  }
+}

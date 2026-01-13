@@ -1,0 +1,61 @@
+@use '../../styles/theme.scss' as *;
+
+.tag-selector {
+  position: relative;
+
+  &__scroll {
+    width: 100%;
+    white-space: nowrap;
+  }
+
+  &__list {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+    padding: $spacing-xs 0;
+  }
+
+  &__tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16rpx 24rpx;
+    background: $color-glass-surface;
+    border: 2rpx solid $color-border;
+    border-radius: $border-radius-full;
+    transition: all 0.2s ease;
+
+    &.active {
+      background: $color-glass-active;
+      border-color: $color-brand-primary;
+
+      .tag-selector__text {
+        color: $color-brand-primary;
+      }
+    }
+
+    &:active {
+      transform: scale(0.96);
+    }
+  }
+
+  &__text {
+    font-size: $font-size-sm;
+    color: $color-text-secondary;
+    white-space: nowrap;
+  }
+
+  &__count {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 8rpx 16rpx;
+    background: $color-page;
+    border-radius: $border-radius-sm;
+
+    text {
+      font-size: $font-size-xs;
+      color: $color-text-tertiary;
+    }
+  }
+}

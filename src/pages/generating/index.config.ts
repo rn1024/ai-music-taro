@@ -1,0 +1,4 @@
+export default definePageConfig({
+  navigationBarTitleText: '生成中',
+  disableScroll: true
+})

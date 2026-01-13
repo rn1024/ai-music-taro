@@ -1,0 +1,116 @@
+import { View, Text, ScrollView } from '@tarojs/components'
+import Taro, { useDidShow } from '@tarojs/taro'
+import { useState } from 'react'
+import { GlassCard, PrimaryButton } from '../../components'
+import { getCreditBalance } from '../../services/credits'
+import { getCurrentUser } from '../../services/user'
+import type { UserProfile } from '../../types'
+import './index.scss'
+
+interface MenuItemProps {
+  icon: string
+  label: string
+  onClick?: () => void
+}
+
+const MenuItem = ({ icon, label, onClick }: MenuItemProps) => (
+  <GlassCard
+    className="menu-item"
+    padding="none"
+    onClick={onClick}
+  >
+    <View className="menu-left">
+      <View className="menu-icon-wrap">
+        <Text className="menu-icon">{icon}</Text>
+      </View>
+      <Text className="menu-label">{label}</Text>
+    </View>
+    <Text className="menu-arrow">›</Text>
+  </GlassCard>
+)
+
+export default function Me() {
+  const [balance, setBalance] = useState(0)
+  const [user, setUser] = useState<UserProfile | null>(null)
+
+  useDidShow(() => {
+    const fetchProfile = async () => {
+      try {
+        const [profile, credits] = await Promise.all([
+          getCurrentUser(),
+          getCreditBalance()
+        ])
+        setUser(profile)
+        setBalance(credits.balance)
+      } catch (error) {
+        Taro.showToast({ title: '用户信息加载失败', icon: 'none' })
+      }
+    }
+
+    fetchProfile()
+  })
+
+  const handleRecharge = () => {
+    Taro.showToast({ title: '充值功能开发中', icon: 'none' })
+  }
+
+  const handleRedeem = () => {
+    Taro.navigateTo({ url: '/pages/redeem/index' })
+  }
+
+  const handleMenuClick = (label: string) => {
+    Taro.showToast({ title: `${label}功能开发中`, icon: 'none' })
+  }
+
+  return (
+    <View className="me-page">
+      <ScrollView className="me-scroll" scrollY>
+        {/* User Card - 原版 */}
+        <View className="user-card">
+          <View className="avatar-wrap">
+            <View className="avatar">
+              <Text className="avatar-icon">👤</Text>
+            </View>
+            {user?.isPro ? (
+              <View className="pro-badge">
+                <Text>PRO</Text>
+              </View>
+            ) : null}
+          </View>
+          <View className="user-info">
+            <Text className="user-name">{user?.nickname ?? 'Music Maker'}</Text>
+            <Text className="user-id">ID: {user?.id ?? '--'}</Text>
+          </View>
+        </View>
+
+        {/* Credits Card - 原版 */}
+        <GlassCard className="credits-card" variant="highlight" padding="none">
+          <View className="credits-glow" />
+          <View className="credits-content">
+            <View className="credits-left">
+              <Text className="credits-label">剩余额度</Text>
+              <View className="credits-value-wrap">
+                <Text className="credits-value">{balance}</Text>
+                <Text className="credits-unit">次</Text>
+              </View>
+            </View>
+            <View className="credits-right">
+              <PrimaryButton size="sm" onClick={handleRecharge}>
+                立即充值
+              </PrimaryButton>
+            </View>
+          </View>
+        </GlassCard>
+
+        {/* Menu List - 原版 */}
+        <View className="menu-list">
+          <MenuItem icon="💳" label="消费记录" onClick={() => handleMenuClick('消费记录')} />
+          <MenuItem icon="🎁" label="兑换码兑换" onClick={handleRedeem} />
+          <MenuItem icon="❓" label="使用指引" onClick={() => handleMenuClick('使用指引')} />
+          <MenuItem icon="⚙️" label="设置" onClick={() => handleMenuClick('设置')} />
+          <MenuItem icon="🧩" label="组件规范 (Dev)" onClick={() => handleMenuClick('组件规范')} />
+        </View>
+      </ScrollView>
+    </View>
+  )
+}

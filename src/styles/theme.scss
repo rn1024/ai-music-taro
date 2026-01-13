@@ -1,0 +1,93 @@
+// ========================================
+// AI Music Taro - 主题变量
+// ========================================
+
+// 品牌色
+$color-brand-primary: #fd429c;
+$color-brand-primary-light: #ff85c2;
+$color-brand-gradient: linear-gradient(135deg, #fd429c, #ff85c2);
+
+// 背景色
+$color-page: #050505;
+$color-glass-surface: rgba(255, 255, 255, 0.06);
+$color-glass-highlight: rgba(255, 255, 255, 0.12);
+$color-glass-active: rgba(253, 66, 156, 0.15);
+
+// 文字颜色
+$color-text-primary: #ffffff;
+$color-text-secondary: rgba(255, 255, 255, 0.6);
+$color-text-tertiary: rgba(255, 255, 255, 0.4);
+$color-text-placeholder: rgba(255, 255, 255, 0.3);
+
+// 边框
+$color-border: rgba(255, 255, 255, 0.1);
+$color-border-active: rgba(253, 66, 156, 0.3);
+
+// 状态色
+$color-success: #22c55e;
+$color-error: #ef4444;
+$color-warning: #f59e0b;
+
+// 字体
+$font-family-display: "PingFang SC", "Heiti SC", system-ui, sans-serif;
+$font-family-body: "PingFang SC", system-ui, sans-serif;
+
+// 字号
+$font-size-xs: 24rpx;
+$font-size-sm: 28rpx;
+$font-size-base: 32rpx;
+$font-size-lg: 36rpx;
+$font-size-xl: 40rpx;
+$font-size-2xl: 48rpx;
+$font-size-3xl: 60rpx;
+$font-size-4xl: 72rpx;
+
+// 圆角
+$radius-sm: 8rpx;
+$radius-md: 16rpx;
+$radius-lg: 24rpx;
+$radius-xl: 32rpx;
+$radius-2xl: 48rpx;
+$radius-full: 9999rpx;
+
+// 间距
+$spacing-1: 8rpx;
+$spacing-2: 16rpx;
+$spacing-3: 24rpx;
+$spacing-4: 32rpx;
+$spacing-5: 40rpx;
+$spacing-6: 48rpx;
+$spacing-8: 64rpx;
+
+// 阴影
+$shadow-sm: 0 2rpx 8rpx rgba(0, 0, 0, 0.1);
+$shadow-md: 0 8rpx 24rpx rgba(0, 0, 0, 0.15);
+$shadow-lg: 0 16rpx 48rpx rgba(0, 0, 0, 0.2);
+$shadow-brand: 0 8rpx 32rpx rgba(253, 66, 156, 0.3);
+
+// 字重
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// 字号别名
+$font-size-md: $font-size-base;
+$font-size-xxl: $font-size-3xl;
+
+// 间距别名
+$spacing-xs: $spacing-1;
+$spacing-sm: $spacing-2;
+$spacing-md: $spacing-4;
+$spacing-lg: $spacing-6;
+$spacing-xl: $spacing-8;
+
+// 圆角别名
+$border-radius-sm: $radius-sm;
+$border-radius-md: $radius-md;
+$border-radius-lg: $radius-lg;
+$border-radius-xl: $radius-xl;
+$border-radius-full: $radius-full;
+
+// 品牌色别名
+$color-brand-secondary: $color-brand-primary-light;

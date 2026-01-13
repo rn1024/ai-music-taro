@@ -1,0 +1,183 @@
+@use '../../styles/theme.scss' as *;
+
+.me-page {
+  min-height: 100vh;
+  background: $color-page;
+
+  .me-scroll {
+    height: 100vh;
+    padding: 48rpx 32rpx;
+    padding-bottom: 200rpx;
+  }
+
+  // User Card - 原版
+  .user-card {
+    text-align: center;
+    padding: 32rpx 0;
+    margin-bottom: 32rpx;
+
+    .avatar-wrap {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 32rpx;
+
+      .avatar {
+        width: 192rpx;
+        height: 192rpx;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        border: 4rpx solid rgba($color-brand-primary, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+
+        .avatar-icon {
+          font-size: 80rpx;
+          color: rgba(255, 255, 255, 0.5);
+        }
+      }
+
+      .pro-badge {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background: $color-brand-primary;
+        padding: 4rpx 16rpx;
+        border-radius: 999rpx;
+        border: 4rpx solid #000;
+
+        text {
+          font-size: 20rpx;
+          font-weight: $font-weight-bold;
+          color: #fff;
+        }
+      }
+    }
+
+    .user-info {
+      .user-name {
+        display: block;
+        font-size: 40rpx;
+        font-weight: $font-weight-bold;
+        color: #fff;
+        margin-bottom: 8rpx;
+      }
+
+      .user-id {
+        display: block;
+        font-size: 28rpx;
+        color: rgba(255, 255, 255, 0.4);
+      }
+    }
+  }
+
+  // Credits Card - 原版
+  .credits-card {
+    padding: 48rpx;
+    margin-bottom: 32rpx;
+    position: relative;
+    overflow: hidden;
+
+    .credits-glow {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 256rpx;
+      height: 256rpx;
+      background: rgba($color-brand-primary, 0.2);
+      filter: blur(120rpx);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .credits-content {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .credits-left {
+        .credits-label {
+          display: block;
+          font-size: 24rpx;
+          color: rgba(255, 255, 255, 0.6);
+          margin-bottom: 8rpx;
+        }
+
+        .credits-value-wrap {
+          display: flex;
+          align-items: baseline;
+          gap: 8rpx;
+
+          .credits-value {
+            font-size: 72rpx;
+            font-weight: $font-weight-bold;
+            color: #fff;
+            font-family: $font-family-display;
+          }
+
+          .credits-unit {
+            font-size: 32rpx;
+            color: rgba(255, 255, 255, 0.4);
+          }
+        }
+      }
+
+      .credits-right {
+        width: 224rpx;
+      }
+    }
+  }
+
+  // Menu List - 原版
+  .menu-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24rpx;
+  }
+
+  .menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 32rpx;
+
+    &:active {
+      transform: scale(0.99);
+    }
+
+    .menu-left {
+      display: flex;
+      align-items: center;
+      gap: 32rpx;
+
+      .menu-icon-wrap {
+        width: 64rpx;
+        height: 64rpx;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.05);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .menu-icon {
+          font-size: 40rpx;
+          color: rgba(255, 255, 255, 0.7);
+        }
+      }
+
+      .menu-label {
+        font-size: 28rpx;
+        font-weight: $font-weight-medium;
+        color: rgba(255, 255, 255, 0.9);
+      }
+    }
+
+    .menu-arrow {
+      font-size: 32rpx;
+      color: rgba(255, 255, 255, 0.3);
+    }
+  }
+}

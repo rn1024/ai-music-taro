@@ -1,0 +1,372 @@
+@use '../../styles/theme.scss' as *;
+
+.discovery-page {
+  min-height: 100vh;
+  background: $color-page;
+  padding-bottom: 200rpx;
+
+  // Header - 按原版: px-6 pt-4 pb-2 flex justify-between items-center
+  .discovery-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 32rpx 48rpx 16rpx;
+
+    .header-title {
+      font-size: 48rpx;
+      font-weight: $font-weight-bold;
+      color: $color-text-primary;
+    }
+
+    .header-icon-wrap {
+      width: 72rpx;
+      height: 72rpx;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .header-icon {
+      font-size: 40rpx;
+      color: $color-brand-primary;
+    }
+  }
+
+  // Banner - 按原版
+  .banner-section {
+    padding: 0 32rpx;
+    margin-top: 32rpx;
+
+    .banner-card {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 2 / 1;
+      border-radius: 48rpx;
+      overflow: hidden;
+
+      .banner-image {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .banner-gradient {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.2), transparent);
+      }
+
+      .banner-content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 48rpx;
+
+        .banner-badge {
+          display: inline-flex;
+          padding: 8rpx 16rpx;
+          background: rgba($color-brand-primary, 0.2);
+          backdrop-filter: blur(20rpx);
+          border: 2rpx solid rgba($color-brand-primary, 0.3);
+          border-radius: 16rpx;
+          margin-bottom: 16rpx;
+
+          text {
+            font-size: 24rpx;
+            font-weight: $font-weight-bold;
+            color: $color-brand-primary-light;
+          }
+        }
+
+        .banner-title {
+          display: block;
+          font-size: 48rpx;
+          font-weight: $font-weight-bold;
+          color: #fff;
+          margin-bottom: 8rpx;
+        }
+
+        .banner-desc {
+          display: block;
+          font-size: 28rpx;
+          color: rgba(255, 255, 255, 0.7);
+          margin-bottom: 32rpx;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        .banner-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 16rpx;
+          padding: 16rpx 40rpx;
+          background: $color-brand-primary;
+          border-radius: 999rpx;
+
+          &:active {
+            background: $color-brand-primary-light;
+          }
+
+          .btn-icon {
+            font-size: 28rpx;
+            color: #fff;
+          }
+
+          .btn-text {
+            font-size: 28rpx;
+            font-weight: $font-weight-medium;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+
+  // Categories Section
+  .categories-section {
+    margin-top: 64rpx;
+
+    .section-header {
+      padding: 0 48rpx 24rpx;
+    }
+
+    .section-title {
+      font-size: 36rpx;
+      font-weight: $font-weight-bold;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .categories-scroll {
+      padding-left: 48rpx;
+      white-space: nowrap;
+    }
+
+    .categories-list {
+      display: inline-flex;
+      gap: 24rpx;
+      padding-right: 48rpx;
+      padding-bottom: 16rpx;
+    }
+
+    .category-item {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16rpx 32rpx;
+      border-radius: 999rpx;
+      background: rgba(255, 255, 255, 0.05);
+      border: 2rpx solid rgba(255, 255, 255, 0.05);
+      transition: all 0.2s;
+
+      text {
+        font-size: 28rpx;
+        font-weight: $font-weight-medium;
+        color: rgba(255, 255, 255, 0.6);
+        white-space: nowrap;
+      }
+
+      &.active {
+        background: #fff;
+
+        text {
+          color: #000;
+        }
+      }
+
+      &:active {
+        transform: scale(0.96);
+      }
+    }
+  }
+
+  // Samples Section
+  .samples-section {
+    margin-top: 64rpx;
+    padding: 0 48rpx;
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 32rpx;
+
+      .section-title-wrap {
+        display: flex;
+        align-items: center;
+        gap: 16rpx;
+
+        .trending-icon {
+          font-size: 40rpx;
+        }
+
+        .section-title {
+          font-size: 36rpx;
+          font-weight: $font-weight-bold;
+          color: rgba(255, 255, 255, 0.9);
+        }
+      }
+
+      .view-more {
+        display: flex;
+        align-items: center;
+        gap: 4rpx;
+
+        text {
+          font-size: 24rpx;
+          color: rgba(255, 255, 255, 0.4);
+        }
+
+        .arrow {
+          font-size: 24rpx;
+          color: rgba(255, 255, 255, 0.4);
+        }
+      }
+    }
+
+    .samples-list {
+      display: flex;
+      flex-direction: column;
+      gap: 32rpx;
+    }
+
+    // Sample Card - 按原版: p-3 flex gap-4 items-center
+    .sample-card {
+      display: flex;
+      align-items: center;
+      gap: 32rpx;
+      padding: 24rpx !important;
+
+      &:active {
+        transform: scale(0.98);
+      }
+
+      .sample-cover {
+        position: relative;
+        width: 160rpx;
+        height: 160rpx;
+        border-radius: 24rpx;
+        overflow: hidden;
+        flex-shrink: 0;
+
+        .cover-image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .play-overlay {
+          position: absolute;
+          inset: 0;
+          background: rgba(0, 0, 0, 0.3);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          opacity: 0;
+          transition: opacity 0.2s;
+
+          .play-icon {
+            font-size: 64rpx;
+            color: #fff;
+          }
+        }
+
+        &:active .play-overlay {
+          opacity: 1;
+        }
+      }
+
+      .sample-info {
+        flex: 1;
+        min-width: 0;
+
+        .info-top {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+
+          .sample-title {
+            font-size: 32rpx;
+            font-weight: $font-weight-bold;
+            color: #fff;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            padding-right: 16rpx;
+          }
+
+          .sample-duration {
+            font-size: 24rpx;
+            color: rgba(255, 255, 255, 0.4);
+            font-family: monospace;
+            flex-shrink: 0;
+          }
+        }
+
+        .sample-author {
+          display: block;
+          font-size: 28rpx;
+          color: rgba($color-brand-primary, 0.8);
+          margin-bottom: 16rpx;
+        }
+
+        .info-bottom {
+          display: flex;
+          align-items: center;
+          gap: 32rpx;
+
+          .sample-likes {
+            display: flex;
+            align-items: center;
+            gap: 12rpx;
+
+            .heart-icon {
+              font-size: 28rpx;
+              color: rgba(255, 255, 255, 0.4);
+            }
+
+            .likes-count {
+              font-size: 24rpx;
+              color: rgba(255, 255, 255, 0.4);
+            }
+          }
+
+          .sample-tag {
+            padding: 6rpx 12rpx;
+            border-radius: 12rpx;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2rpx solid rgba(255, 255, 255, 0.05);
+
+            text {
+              font-size: 24rpx;
+              color: rgba(255, 255, 255, 0.6);
+            }
+          }
+        }
+      }
+
+      .share-btn {
+        width: 72rpx;
+        height: 72rpx;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .share-icon {
+          font-size: 40rpx;
+          color: rgba(255, 255, 255, 0.4);
+        }
+
+        &:active {
+          .share-icon {
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+}

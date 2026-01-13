@@ -1,0 +1,39 @@
+@use '../../styles/theme.scss' as *;
+
+.glass-card {
+  background: $color-glass-surface;
+  border-radius: $border-radius-lg;
+  border: 2rpx solid $color-border;
+  backdrop-filter: blur(20rpx);
+
+  // 变体
+  &--default {
+    background: $color-glass-surface;
+  }
+
+  &--highlight {
+    background: $color-glass-highlight;
+  }
+
+  &--active {
+    background: $color-glass-active;
+    border-color: $color-border-active;
+  }
+
+  // 内边距
+  &--padding-none {
+    padding: 0;
+  }
+
+  &--padding-sm {
+    padding: $spacing-sm;
+  }
+
+  &--padding-md {
+    padding: $spacing-md;
+  }
+
+  &--padding-lg {
+    padding: $spacing-lg;
+  }
+}

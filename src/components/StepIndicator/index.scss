@@ -1,0 +1,86 @@
+@use '../../styles/theme.scss' as *;
+
+.step-indicator {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+
+  &__progress {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+  }
+
+  &__dot {
+    width: 48rpx;
+    height: 48rpx;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $color-glass-surface;
+    border: 2rpx solid $color-border;
+    transition: all 0.3s ease;
+
+    &.active {
+      background: linear-gradient(135deg, $color-brand-primary 0%, $color-brand-secondary 100%);
+      border-color: $color-brand-primary;
+      box-shadow: 0 0 20rpx rgba($color-brand-primary, 0.4);
+    }
+
+    &.completed {
+      background: $color-brand-primary;
+      border-color: $color-brand-primary;
+    }
+  }
+
+  &__number {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-text-secondary;
+  }
+
+  &__check {
+    font-size: $font-size-sm;
+    color: $color-text-primary;
+  }
+
+  &__line {
+    width: 60rpx;
+    height: 4rpx;
+    background: $color-border;
+    margin: 0 8rpx;
+    transition: all 0.3s ease;
+
+    &.completed {
+      background: $color-brand-primary;
+    }
+  }
+
+  &__labels {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__label {
+    flex: 1;
+    text-align: center;
+    font-size: $font-size-xs;
+    color: $color-text-tertiary;
+    transition: all 0.3s ease;
+
+    &.active {
+      color: $color-brand-primary;
+      font-weight: $font-weight-medium;
+    }
+
+    &.completed {
+      color: $color-text-secondary;
+    }
+  }
+}

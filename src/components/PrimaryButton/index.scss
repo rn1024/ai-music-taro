@@ -1,0 +1,130 @@
+@use '../../styles/theme.scss' as *;
+
+.primary-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $border-radius-full;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  // 尺寸
+  &--sm {
+    height: 64rpx;
+    padding: 0 $spacing-md;
+
+    .primary-button__text {
+      font-size: $font-size-sm;
+    }
+  }
+
+  &--md {
+    height: 88rpx;
+    padding: 0 $spacing-lg;
+
+    .primary-button__text {
+      font-size: $font-size-md;
+    }
+  }
+
+  &--lg {
+    height: 100rpx;
+    padding: 0 $spacing-xl;
+
+    .primary-button__text {
+      font-size: $font-size-lg;
+    }
+  }
+
+  // 变体
+  &--primary {
+    background: linear-gradient(135deg, $color-brand-primary 0%, $color-brand-secondary 100%);
+    box-shadow: $shadow-brand;
+
+    .primary-button__text {
+      color: $color-text-primary;
+      font-weight: $font-weight-semibold;
+    }
+
+    &:active {
+      transform: scale(0.98);
+      opacity: 0.9;
+    }
+  }
+
+  &--secondary {
+    background: $color-glass-surface;
+    border: 2rpx solid $color-border;
+
+    .primary-button__text {
+      color: $color-text-primary;
+      font-weight: $font-weight-medium;
+    }
+
+    &:active {
+      background: $color-glass-highlight;
+    }
+  }
+
+  &--ghost {
+    background: transparent;
+
+    .primary-button__text {
+      color: $color-brand-primary;
+      font-weight: $font-weight-medium;
+    }
+
+    &:active {
+      background: $color-glass-surface;
+    }
+  }
+
+  // 状态
+  &--block {
+    width: 100%;
+  }
+
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    &:active {
+      transform: none;
+    }
+  }
+
+  &--loading {
+    cursor: wait;
+  }
+
+  // 加载动画
+  &__loading {
+    display: flex;
+    gap: 8rpx;
+
+    .loading-dot {
+      width: 12rpx;
+      height: 12rpx;
+      border-radius: 50%;
+      background: $color-text-primary;
+      animation: loading-bounce 1.4s infinite ease-in-out both;
+
+      &:nth-child(1) {
+        animation-delay: -0.32s;
+      }
+
+      &:nth-child(2) {
+        animation-delay: -0.16s;
+      }
+    }
+  }
+}
+
+@keyframes loading-bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
