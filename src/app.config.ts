@@ -6,7 +6,8 @@ export default defineAppConfig({
     'pages/me/index',
     'pages/redeem/index',
     'pages/generating/index',
-    'pages/result/index'
+    'pages/result/index',
+    'pages/hot-samples/index'
   ],
   tabBar: {
     color: 'rgba(255,255,255,0.4)',

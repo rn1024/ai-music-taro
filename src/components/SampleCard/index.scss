@@ -1,0 +1,154 @@
+@use '../../styles/theme.scss' as *;
+
+.sample-card {
+  display: flex;
+  align-items: center;
+  gap: 32rpx;
+  padding: 24rpx !important;
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &__cover {
+    position: relative;
+    width: 160rpx;
+    height: 160rpx;
+    border-radius: $radius-lg;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  &__cover-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__play-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+
+    &.playing {
+      opacity: 1;
+      background: rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  &__cover:active &__play-overlay {
+    opacity: 1;
+  }
+
+  &__play-icon {
+    width: 48rpx;
+    height: 48rpx;
+  }
+
+  &__info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__info-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  &__title {
+    font-size: $font-size-base;
+    font-weight: $font-weight-bold;
+    color: $color-text-primary;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-right: 16rpx;
+    max-width: 280rpx;
+  }
+
+  &__duration {
+    font-size: $font-size-xs;
+    color: $color-text-tertiary;
+    font-family: monospace;
+    flex-shrink: 0;
+  }
+
+  &__author {
+    display: block;
+    font-size: $font-size-sm;
+    color: rgba($color-brand-primary, 0.8);
+    margin-bottom: 16rpx;
+  }
+
+  &__info-bottom {
+    display: flex;
+    align-items: center;
+    gap: 32rpx;
+  }
+
+  &__likes {
+    display: flex;
+    align-items: center;
+    gap: 12rpx;
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  &__heart-icon {
+    width: 28rpx;
+    height: 28rpx;
+    transition: transform 0.2s;
+
+    &.liked {
+      transform: scale(1.1);
+    }
+  }
+
+  &__likes-count {
+    font-size: $font-size-xs;
+    color: $color-text-tertiary;
+
+    &.liked {
+      color: $color-brand-primary;
+    }
+  }
+
+  &__tag {
+    padding: 6rpx 16rpx;
+    border-radius: $radius-md;
+    background: $color-glass-surface;
+    border: 2rpx solid rgba(255, 255, 255, 0.05);
+
+    text {
+      font-size: $font-size-xs;
+      color: $color-text-secondary;
+    }
+  }
+
+  &__share {
+    width: 72rpx;
+    height: 72rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    &:active {
+      opacity: 0.7;
+    }
+  }
+
+  &__share-icon {
+    width: 36rpx;
+    height: 36rpx;
+    opacity: 0.6;
+  }
+}

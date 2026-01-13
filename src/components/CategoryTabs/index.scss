@@ -1,0 +1,41 @@
+@use '../../styles/theme.scss' as *;
+
+.category-tabs {
+  white-space: nowrap;
+
+  &__list {
+    display: inline-flex;
+    gap: 16rpx;
+    padding-right: 32rpx;
+  }
+
+  &__item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14rpx 28rpx;
+    border-radius: $radius-full;
+    background: $color-glass-surface;
+    border: 2rpx solid rgba(255, 255, 255, 0.05);
+    transition: all 0.2s;
+
+    text {
+      font-size: $font-size-sm;
+      font-weight: $font-weight-medium;
+      color: $color-text-secondary;
+      white-space: nowrap;
+    }
+
+    &.active {
+      background: #fff;
+
+      text {
+        color: #000;
+      }
+    }
+
+    &:active {
+      transform: scale(0.96);
+    }
+  }
+}

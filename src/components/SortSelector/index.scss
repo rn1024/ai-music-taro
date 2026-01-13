@@ -1,0 +1,49 @@
+@use '../../styles/theme.scss' as *;
+
+.sort-selector {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-top: 24rpx;
+
+  &__label {
+    font-size: $font-size-sm;
+    color: $color-text-tertiary;
+  }
+
+  &__options {
+    display: flex;
+    align-items: center;
+    gap: 12rpx;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10rpx 20rpx;
+    border-radius: $radius-full;
+    background: transparent;
+    border: 2rpx solid $color-border;
+    transition: all 0.2s;
+
+    text {
+      font-size: $font-size-xs;
+      font-weight: $font-weight-medium;
+      color: $color-text-tertiary;
+    }
+
+    &.active {
+      background: rgba($color-brand-primary, 0.15);
+      border-color: rgba($color-brand-primary, 0.3);
+
+      text {
+        color: $color-brand-primary;
+      }
+    }
+
+    &:active {
+      transform: scale(0.96);
+    }
+  }
+}

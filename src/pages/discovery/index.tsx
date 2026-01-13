@@ -86,6 +86,11 @@ export default function Discovery() {
     Taro.switchTab({ url: '/pages/create/index' })
   }
 
+  const handleViewMore = () => {
+    const category = categories[activeCategory]?.id ?? 'all'
+    Taro.navigateTo({ url: `/pages/hot-samples/index?category=${category}` })
+  }
+
   const handleShare = async (id: string) => {
     try {
       await shareMusic(id, { platform: 'weapp', channel: 'session' })
@@ -155,7 +160,7 @@ export default function Discovery() {
             <Image src={trendingUpIcon} className="trending-icon" mode="aspectFit" />
             <Text className="section-title">热门作品</Text>
           </View>
-          <View className="view-more">
+          <View className="view-more" onClick={handleViewMore}>
             <Text>查看更多</Text>
             <Text className="arrow">›</Text>
           </View>
