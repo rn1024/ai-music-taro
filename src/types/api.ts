@@ -70,6 +70,7 @@ export interface HotSample {
   duration: number
   cover: string
   tag: string
+  isLiked?: boolean
 }
 
 export interface MusicCreateRequest {
@@ -153,4 +154,9 @@ export interface ShareResponse {
 export interface DeleteResponse {
   deleted: boolean
   id: string
+}
+
+export interface LikeResponse {
+  liked: boolean
+  likes: number
 }

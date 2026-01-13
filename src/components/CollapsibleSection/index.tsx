@@ -1,4 +1,5 @@
-import { View, Text } from '@tarojs/components'
+import { View, Text, Image } from '@tarojs/components'
+import { chevronRightIcon } from '../../assets/icons'
 import { useState, PropsWithChildren } from 'react'
 import './index.scss'
 
@@ -30,9 +31,11 @@ export default function CollapsibleSection({
             <Text className="collapsible-section__subtitle">{subtitle}</Text>
           )}
         </View>
-        <View className={`collapsible-section__arrow ${expanded ? 'expanded' : ''}`}>
-          <Text>›</Text>
-        </View>
+        <Image
+          src={chevronRightIcon}
+          className={`collapsible-section__arrow ${expanded ? 'expanded' : ''}`}
+          mode="aspectFit"
+        />
       </View>
 
       <View className={`collapsible-section__content ${expanded ? 'expanded' : ''}`}>

@@ -35,18 +35,10 @@
   }
 
   &__arrow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 48rpx;
-    height: 48rpx;
+    width: 32rpx;
+    height: 32rpx;
     transition: transform 0.3s ease;
     transform: rotate(90deg);
-
-    text {
-      font-size: $font-size-xl;
-      color: $color-text-secondary;
-    }
 
     &.expanded {
       transform: rotate(-90deg);

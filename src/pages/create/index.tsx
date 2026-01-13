@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { ModeSwitcher, PrimaryButton, CollapsibleSection } from '../../components'
 import { createMusic, savePrompt, uploadReferenceAudio } from '../../services/music'
 import type { CreateMode, MusicCreateRequest } from '../../types'
-import { uploadIcon, micIcon, musicIcon, trash2Icon, userIcon, copyIcon, rotateCcwIcon, saveIcon, sparklesIcon } from '../../assets/icons'
+import { uploadIcon, micIcon, musicIcon, trash2Icon, userIcon, copyIcon, rotateCcwIcon, saveIcon, sparklesIcon, chevronRightIcon } from '../../assets/icons'
 import './index.scss'
 
 // 原版灵感标签 - 完全保留
@@ -410,7 +410,7 @@ export default function Create() {
             >
               <View className="picker-display">
                 <Text>{workspace === 0 ? '我的工作台' : '团队工作台'}</Text>
-                <Text className="picker-arrow">›</Text>
+                <Image src={chevronRightIcon} className="picker-arrow" mode="aspectFit" />
               </View>
             </Picker>
           </View>

@@ -5,7 +5,7 @@ import { GlassCard } from '../../components'
 import { getCategories, getHotSamples } from '../../services/discovery'
 import { shareMusic } from '../../services/music'
 import type { Category, HotSample } from '../../types'
-import { sparklesIcon, musicIcon, trendingUpIcon, playIcon, heartIcon, share2Icon } from '../../assets/icons'
+import { sparklesIcon, musicIcon, trendingUpIcon, playIcon, heartIcon, share2Icon, chevronRightIcon } from '../../assets/icons'
 import './index.scss'
 
 const DEFAULT_CATEGORIES: Category[] = [
@@ -162,7 +162,7 @@ export default function Discovery() {
           </View>
           <View className="view-more" onClick={handleViewMore}>
             <Text>查看更多</Text>
-            <Text className="arrow">›</Text>
+            <Image src={chevronRightIcon} className="arrow-icon" mode="aspectFit" />
           </View>
         </View>
 

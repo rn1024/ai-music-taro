@@ -1,5 +1,5 @@
 import { request } from './request'
-import type { Category, HotSample, PaginatedData } from '../types/api'
+import type { Category, HotSample, LikeResponse, PaginatedData } from '../types/api'
 
 export type SortType = 'hot' | 'latest' | 'likes'
 
@@ -24,7 +24,7 @@ export const getHotSamples = (params?: {
 }
 
 export const toggleSampleLike = (sampleId: string) => {
-  return request<{ liked: boolean; likes: number }>({
+  return request<LikeResponse>({
     url: `/discovery/samples/${sampleId}/like`,
     method: 'POST'
   })
