@@ -58,6 +58,7 @@ export default function Create() {
   const [isStylesOpen, setIsStylesOpen] = useState(true)
   const [isAdvancedOpen, setIsAdvancedOpen] = useState(false)
   const [isStylesExpanded, setIsStylesExpanded] = useState(false)
+  const [isInspirationExpanded, setIsInspirationExpanded] = useState(false)
 
   const handleAddTag = (tag: string) => {
     setDescription(prev => {
@@ -191,15 +192,18 @@ export default function Create() {
           </View>
         </View>
 
-        {/* Inspiration Tags - 原版: 灵感参考 */}
+        {/* Inspiration Tags - 灵感参考（可折叠） */}
         <View className="form-section">
           <Text className="form-label">灵感参考</Text>
           <View className="tags-wrap">
-            {INSPIRATION_TAGS.map(tag => (
+            {(isInspirationExpanded ? INSPIRATION_TAGS : INSPIRATION_TAGS.slice(0, 8)).map(tag => (
               <View key={tag} className="tag-item" onClick={() => handleAddTag(tag)}>
                 <Text>{tag}</Text>
               </View>
             ))}
+            <View className="tag-item expand-tag" onClick={() => setIsInspirationExpanded(!isInspirationExpanded)}>
+              <Text>{isInspirationExpanded ? '收起 -' : '展开更多 +'}</Text>
+            </View>
           </View>
         </View>
 
