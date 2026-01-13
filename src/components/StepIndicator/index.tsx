@@ -28,7 +28,7 @@ export default function StepIndicator({
               } ${index === currentStep ? 'active' : ''}`}
             >
               {index < currentStep ? (
-                <Image src={checkIcon} className="step-indicator__check" />
+                <Image src={checkIcon} className="step-indicator__check" mode="aspectFit" />
               ) : (
                 <Text className="step-indicator__number">{index + 1}</Text>
               )}

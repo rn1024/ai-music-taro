@@ -95,10 +95,10 @@ export default function Generating() {
       {/* Header Actions - 原版: Minimize + Close */}
       <View className="header-actions">
         <View className="action-btn" onClick={handleMinimize}>
-          <Image src={minimizeIcon} className="action-icon" />
+          <Image src={minimizeIcon} className="action-icon" mode="aspectFit" />
         </View>
         <View className="action-btn close" onClick={handleCancel}>
-          <Image src={xIcon} className="action-icon" />
+          <Image src={xIcon} className="action-icon" mode="aspectFit" />
         </View>
       </View>
 
@@ -133,7 +133,7 @@ export default function Generating() {
                 <View className="step-indicator">
                   {isCompleted ? (
                     <View className="step-check">
-                      <Image src={checkIcon} className="step-check-icon" />
+                      <Image src={checkIcon} className="step-check-icon" mode="aspectFit" />
                     </View>
                   ) : isActive ? (
                     <View className="step-spinner" />

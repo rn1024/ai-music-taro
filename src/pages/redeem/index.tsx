@@ -91,6 +91,7 @@ export default function RedeemPage() {
               className="redeem-input"
               value={code}
               placeholder="例如 SUNO-XXXX-YYYY"
+              placeholderStyle="color: rgba(255, 255, 255, 0.3)"
               onInput={(event) => setCode(event.detail.value)}
             />
           </View>

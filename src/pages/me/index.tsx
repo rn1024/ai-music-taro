@@ -5,7 +5,7 @@ import { GlassCard, PrimaryButton } from '../../components'
 import { getCreditBalance } from '../../services/credits'
 import { getCurrentUser } from '../../services/user'
 import type { UserProfile } from '../../types'
-import { userIcon, creditCardIcon, giftIcon, circleHelpIcon, settingsIcon, puzzleIcon } from '../../assets/icons'
+import { userIcon, creditCardIcon, giftIcon, circleHelpIcon, settingsIcon, chevronRightIcon } from '../../assets/icons'
 import './index.scss'
 
 interface MenuItemProps {
@@ -22,11 +22,11 @@ const MenuItem = ({ icon, label, onClick }: MenuItemProps) => (
   >
     <View className="menu-left">
       <View className="menu-icon-wrap">
-        <Image src={icon} className="menu-icon" />
+        <Image src={icon} className="menu-icon" mode="aspectFit" />
       </View>
       <Text className="menu-label">{label}</Text>
     </View>
-    <Text className="menu-arrow">›</Text>
+    <Image src={chevronRightIcon} className="menu-arrow" mode="aspectFit" />
   </GlassCard>
 )
 
@@ -70,7 +70,7 @@ export default function Me() {
         <View className="user-card">
           <View className="avatar-wrap">
             <View className="avatar">
-              <Image src={userIcon} className="avatar-icon" />
+              <Image src={userIcon} className="avatar-icon" mode="aspectFit" />
             </View>
             {user?.isPro ? (
               <View className="pro-badge">
@@ -109,7 +109,6 @@ export default function Me() {
           <MenuItem icon={giftIcon} label="兑换码兑换" onClick={handleRedeem} />
           <MenuItem icon={circleHelpIcon} label="使用指引" onClick={() => handleMenuClick('使用指引')} />
           <MenuItem icon={settingsIcon} label="设置" onClick={() => handleMenuClick('设置')} />
-          <MenuItem icon={puzzleIcon} label="组件规范 (Dev)" onClick={() => handleMenuClick('组件规范')} />
         </View>
       </ScrollView>
     </View>

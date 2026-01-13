@@ -89,11 +89,12 @@ export default function History() {
       <ScrollView className="history-scroll" scrollY>
         {/* Search Bar */}
         <View className="search-bar">
-          <Image src={searchIcon} className="search-icon" />
+          <Image src={searchIcon} className="search-icon" mode="aspectFit" />
           <Input
             type="text"
             placeholder="搜索历史记录..."
-            placeholderClass="placeholder"
+            placeholderStyle="color: rgba(255, 255, 255, 0.4)"
+            style={{ background: 'transparent', color: '#fff' }}
             className="search-input"
             value={searchText}
             onInput={(e) => setSearchText(e.detail.value)}
@@ -127,7 +128,7 @@ export default function History() {
                   <Image src={item.cover} mode="aspectFill" className="cover-image" />
                 ) : (
                   <View className="cover-placeholder">
-                    <Image src={clockIcon} className="cover-icon" />
+                    <Image src={clockIcon} className="cover-icon" mode="aspectFit" />
                   </View>
                 )}
                 <View className="cover-overlay" />
@@ -146,10 +147,10 @@ export default function History() {
 
               <View className="item-actions">
                 <View className="action-btn play" onClick={(e) => handlePlay(e, item)}>
-                  <Image src={playIcon} className="action-icon" />
+                  <Image src={playIcon} className="action-icon" mode="aspectFit" />
                 </View>
                 <View className="action-btn more" onClick={(e) => handleMore(e, item)}>
-                  <Image src={ellipsisIcon} className="action-icon" />
+                  <Image src={ellipsisIcon} className="action-icon" mode="aspectFit" />
                 </View>
               </View>
             </GlassCard>

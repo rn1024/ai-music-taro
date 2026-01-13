@@ -98,8 +98,8 @@
           justify-content: center;
 
           .play-icon {
-            font-size: 64rpx;
-            color: #fff;
+            width: 48rpx;
+            height: 48rpx;
             margin-left: 8rpx;
           }
         }
@@ -178,8 +178,8 @@
       }
 
       .action-icon {
-        font-size: 40rpx;
-        color: rgba(255, 255, 255, 0.8);
+        width: 40rpx;
+        height: 40rpx;
       }
 
       .action-label {
@@ -254,9 +254,9 @@
         align-items: center;
         justify-content: center;
 
-        text {
-          font-size: 28rpx;
-          color: #fff;
+        .variant-play-icon {
+          width: 28rpx;
+          height: 28rpx;
         }
 
         &:active {

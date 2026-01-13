@@ -67,7 +67,11 @@ export default function Result() {
 
     try {
       await shareMusic(musicId, { platform: 'weapp', channel: 'session' })
-      Taro.showShareMenu({ withShareTicket: true })
+      if (Taro.getEnv() === Taro.ENV_TYPE.WEAPP) {
+        Taro.showShareMenu({ withShareTicket: true })
+      } else {
+        Taro.showToast({ title: '分享成功', icon: 'success' })
+      }
     } catch (error) {
       Taro.showToast({ title: '分享失败', icon: 'none' })
     }
@@ -110,7 +114,7 @@ export default function Result() {
             />
             <View className="hero-overlay" onClick={handlePlay}>
               <View className="play-btn">
-                <Image src={isPlaying ? pauseIcon : playIcon} className="play-icon" />
+                <Image src={isPlaying ? pauseIcon : playIcon} className="play-icon" mode="aspectFit" />
               </View>
             </View>
 
@@ -134,19 +138,19 @@ export default function Result() {
         {/* Actions Grid - 原版: 4列 */}
         <View className="actions-grid">
           <View className="action-item" onClick={handleDownload}>
-            <Image src={downloadIcon} className="action-icon" />
+            <Image src={downloadIcon} className="action-icon" mode="aspectFit" />
             <Text className="action-label">下载</Text>
           </View>
           <View className="action-item" onClick={handleShare}>
-            <Image src={share2Icon} className="action-icon" />
+            <Image src={share2Icon} className="action-icon" mode="aspectFit" />
             <Text className="action-label">分享</Text>
           </View>
           <View className="action-item" onClick={handleCopyPrompt}>
-            <Image src={copyIcon} className="action-icon" />
+            <Image src={copyIcon} className="action-icon" mode="aspectFit" />
             <Text className="action-label">复制Prompt</Text>
           </View>
           <View className="action-item">
-            <Image src={ellipsisIcon} className="action-icon" />
+            <Image src={ellipsisIcon} className="action-icon" mode="aspectFit" />
             <Text className="action-label">更多</Text>
           </View>
         </View>
@@ -165,7 +169,7 @@ export default function Result() {
                   <Text className="variant-desc">{formatDuration(variant.duration)}</Text>
                 </View>
                 <View className="variant-play">
-                  <Image src={playIcon} className="variant-play-icon" />
+                  <Image src={playIcon} className="variant-play-icon" mode="aspectFit" />
                 </View>
               </GlassCard>
             ))

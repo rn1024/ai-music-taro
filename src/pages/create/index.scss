@@ -48,10 +48,16 @@
       padding: 32rpx;
       border-radius: 32rpx;
       background: rgba(255, 255, 255, 0.05);
-      border: 2rpx solid rgba(255, 255, 255, 0.1);
+      border: 2rpx solid rgba(255, 255, 255, 0.15);
       font-size: 28rpx;
       line-height: 1.6;
       color: #fff;
+
+      textarea,
+      .taro-textarea {
+        background: transparent !important;
+        color: #fff !important;
+      }
     }
   }
 
@@ -77,7 +83,8 @@
       }
 
       .btn-icon {
-        font-size: 32rpx;
+        width: 32rpx;
+        height: 32rpx;
       }
 
       .btn-text {
@@ -114,9 +121,9 @@
         justify-content: center;
         transition: background 0.2s;
 
-        text {
-          font-size: 32rpx;
-          color: #fff;
+        .instrumental-icon-img {
+          width: 32rpx;
+          height: 32rpx;
         }
 
         &.active {
@@ -196,7 +203,8 @@
       margin-bottom: 24rpx;
 
       .clear-icon {
-        font-size: 28rpx;
+        width: 24rpx;
+        height: 24rpx;
       }
 
       .clear-text {
@@ -243,8 +251,8 @@
         }
 
         .action-icon {
-          font-size: 40rpx;
-          color: rgba(255, 255, 255, 0.7);
+          width: 36rpx;
+          height: 36rpx;
         }
 
         .action-label {
@@ -269,6 +277,12 @@
         font-size: 28rpx;
         color: #fff;
         margin-bottom: 16rpx;
+
+        textarea,
+        .weui-textarea {
+          background: transparent !important;
+          color: #fff !important;
+        }
       }
 
       .enhance-input {
@@ -281,6 +295,14 @@
         font-size: 24rpx;
         color: #fff;
         margin-bottom: 16rpx;
+        display: flex;
+        align-items: center;
+
+        input,
+        .taro-input {
+          background: transparent !important;
+          color: #fff !important;
+        }
       }
 
       .lyrics-actions {
@@ -295,7 +317,8 @@
           gap: 8rpx;
 
           .link-icon {
-            font-size: 24rpx;
+            width: 20rpx;
+            height: 20rpx;
           }
 
           text {
@@ -332,6 +355,12 @@
         font-size: 28rpx;
         color: #fff;
         margin-bottom: 16rpx;
+
+        textarea,
+        .weui-textarea {
+          background: transparent !important;
+          color: #fff !important;
+        }
       }
 
       .upsample-btn {
@@ -351,8 +380,8 @@
         }
 
         .upsample-icon {
-          font-size: 28rpx;
-          color: $color-brand-primary;
+          width: 28rpx;
+          height: 28rpx;
         }
 
         .upsample-text {
@@ -517,6 +546,14 @@
           border: 2rpx solid rgba(255, 255, 255, 0.1);
           font-size: 28rpx;
           color: #fff;
+          display: flex;
+          align-items: center;
+
+          input,
+          .weui-input {
+            background: transparent !important;
+            color: #fff !important;
+          }
         }
 
         .picker-display {

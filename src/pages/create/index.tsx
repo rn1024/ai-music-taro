@@ -157,7 +157,7 @@ export default function Create() {
           <Textarea
             className="form-textarea"
             placeholder="描述你的歌曲灵感，例如：关于服务器朋友的叛逆重低音贝斯歌曲..."
-            placeholderClass="placeholder"
+            placeholderStyle="color: rgba(255, 255, 255, 0.3)"
             value={description}
             onInput={(e) => setDescription(e.detail.value)}
           />
@@ -166,11 +166,11 @@ export default function Create() {
         {/* Buttons Row - 原版: 上传音频 + 录制歌词 */}
         <View className="buttons-row">
           <View className="action-btn" onClick={handleUploadAudio}>
-            <Image src={uploadIcon} className="btn-icon" />
+            <Image src={uploadIcon} className="btn-icon" mode="aspectFit" />
             <Text className="btn-text">上传音频</Text>
           </View>
           <View className="action-btn" onClick={() => Taro.showToast({ title: '功能开发中', icon: 'none' })}>
-            <Image src={micIcon} className="btn-icon" />
+            <Image src={micIcon} className="btn-icon" mode="aspectFit" />
             <Text className="btn-text">录制歌词</Text>
           </View>
         </View>
@@ -179,7 +179,7 @@ export default function Create() {
         <View className="instrumental-card">
           <View className="instrumental-left">
             <View className={`instrumental-icon ${isInstrumental ? 'active' : ''}`}>
-              <Image src={musicIcon} className="instrumental-icon-img" />
+              <Image src={musicIcon} className="instrumental-icon-img" mode="aspectFit" />
             </View>
             <Text className="instrumental-label">纯音乐模式</Text>
           </View>
@@ -206,7 +206,7 @@ export default function Create() {
         {/* Actions - 原版 */}
         <View className="form-actions">
           <View className="clear-btn" onClick={handleClearBasic}>
-            <Image src={trash2Icon} className="clear-icon" />
+            <Image src={trash2Icon} className="clear-icon" mode="aspectFit" />
             <Text className="clear-text">清空所有输入</Text>
           </View>
           <PrimaryButton
@@ -229,15 +229,15 @@ export default function Create() {
         {/* Top Action Buttons - 原版: 3列按钮 */}
         <View className="top-actions">
           <View className="top-action-btn" onClick={handleUploadAudio}>
-            <Image src={uploadIcon} className="action-icon" />
+            <Image src={uploadIcon} className="action-icon" mode="aspectFit" />
             <Text className="action-label">上传音频</Text>
           </View>
           <View className="top-action-btn" onClick={() => Taro.showToast({ title: '功能开发中', icon: 'none' })}>
-            <Image src={userIcon} className="action-icon" />
+            <Image src={userIcon} className="action-icon" mode="aspectFit" />
             <Text className="action-label">角色</Text>
           </View>
           <View className="top-action-btn" onClick={() => Taro.showToast({ title: '功能开发中', icon: 'none' })}>
-            <Image src={copyIcon} className="action-icon" />
+            <Image src={copyIcon} className="action-icon" mode="aspectFit" />
             <Text className="action-label">灵感库</Text>
           </View>
         </View>
@@ -253,28 +253,28 @@ export default function Create() {
             <Textarea
               className="lyrics-textarea"
               placeholder="输入歌词或故事... 留空则为纯音乐。"
-              placeholderClass="placeholder"
+              placeholderStyle="color: rgba(255, 255, 255, 0.3)"
               value={lyrics}
               onInput={(e) => setLyrics(e.detail.value)}
             />
             <Input
               className="enhance-input"
               placeholder="歌词增强指令 (例如：让歌词更快乐)..."
-              placeholderClass="placeholder"
+              placeholderStyle="color: rgba(255, 255, 255, 0.3)"
               value={enhanceLyrics}
               onInput={(e) => setEnhanceLyrics(e.detail.value)}
             />
             <View className="lyrics-actions">
               <View className="action-link">
-                <Image src={rotateCcwIcon} className="link-icon" />
+                <Image src={rotateCcwIcon} className="link-icon" mode="aspectFit" />
                 <Text>撤销</Text>
               </View>
               <View className="action-link" onClick={handleSavePrompt}>
-                <Image src={saveIcon} className="link-icon" />
+                <Image src={saveIcon} className="link-icon" mode="aspectFit" />
                 <Text>保存提示</Text>
               </View>
               <View className="action-link danger" onClick={() => setLyrics('')}>
-                <Image src={trash2Icon} className="link-icon" />
+                <Image src={trash2Icon} className="link-icon" mode="aspectFit" />
                 <Text>清空</Text>
               </View>
             </View>
@@ -291,12 +291,12 @@ export default function Create() {
             <Textarea
               className="styles-textarea"
               placeholder="输入风格描述 (例如：爵士鼓，帮派合唱，强劲节拍)..."
-              placeholderClass="placeholder"
+              placeholderStyle="color: rgba(255, 255, 255, 0.3)"
               value={styles}
               onInput={(e) => setStyles(e.detail.value)}
             />
             <View className="upsample-btn">
-              <Image src={sparklesIcon} className="upsample-icon" />
+              <Image src={sparklesIcon} className="upsample-icon" mode="aspectFit" />
               <Text className="upsample-text">风格增强 (Upsample)</Text>
             </View>
             <View className="style-tags">
@@ -390,6 +390,7 @@ export default function Create() {
             <Input
               className="field-input"
               placeholder="输入标题..."
+              placeholderStyle="color: rgba(255, 255, 255, 0.3)"
               value={title}
               onInput={(e) => setTitle(e.detail.value)}
             />
@@ -414,7 +415,7 @@ export default function Create() {
         {/* Actions - 原版 */}
         <View className="form-actions">
           <View className="clear-btn" onClick={handleClearPro}>
-            <Image src={trash2Icon} className="clear-icon" />
+            <Image src={trash2Icon} className="clear-icon" mode="aspectFit" />
             <Text className="clear-text">清空所有输入</Text>
           </View>
           <PrimaryButton

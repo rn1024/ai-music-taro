@@ -101,7 +101,7 @@ export default function Discovery() {
       <View className="discovery-header">
         <Text className="header-title">发现</Text>
         <View className="header-icon-wrap">
-          <Image src={sparklesIcon} className="header-icon" />
+          <Image src={sparklesIcon} className="header-icon" mode="aspectFit" />
         </View>
       </View>
 
@@ -121,7 +121,7 @@ export default function Discovery() {
             <Text className="banner-title">AI 音乐创作挑战赛</Text>
             <Text className="banner-desc">使用 "Cyberpunk" 风格创作，赢取 Pro 会员</Text>
             <View className="banner-btn" onClick={handleNavigateToCreate}>
-              <Image src={musicIcon} className="btn-icon" />
+              <Image src={musicIcon} className="btn-icon" mode="aspectFit" />
               <Text className="btn-text">立即参与</Text>
             </View>
           </View>
@@ -152,7 +152,7 @@ export default function Discovery() {
       <View className="samples-section">
         <View className="section-header">
           <View className="section-title-wrap">
-            <Image src={trendingUpIcon} className="trending-icon" />
+            <Image src={trendingUpIcon} className="trending-icon" mode="aspectFit" />
             <Text className="section-title">热门作品</Text>
           </View>
           <View className="view-more">
@@ -168,7 +168,7 @@ export default function Discovery() {
               <View className="sample-cover">
                 <Image src={sample.image} mode="aspectFill" className="cover-image" />
                 <View className="play-overlay">
-                  <Image src={playIcon} className="play-icon" />
+                  <Image src={playIcon} className="play-icon" mode="aspectFit" />
                 </View>
               </View>
 
@@ -181,7 +181,7 @@ export default function Discovery() {
                 <Text className="sample-author">@{sample.author}</Text>
                 <View className="info-bottom">
                   <View className="sample-likes">
-                    <Image src={heartIcon} className="heart-icon" />
+                    <Image src={heartIcon} className="heart-icon" mode="aspectFit" />
                     <Text className="likes-count">{sample.likes}</Text>
                   </View>
                   <View className="sample-tag">
@@ -192,7 +192,7 @@ export default function Discovery() {
 
               {/* 分享按钮 */}
               <View className="share-btn" onClick={() => handleShare(sample.id)}>
-                <Image src={share2Icon} className="share-icon" />
+                <Image src={share2Icon} className="share-icon" mode="aspectFit" />
               </View>
             </GlassCard>
           ))}

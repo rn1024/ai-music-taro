@@ -9,14 +9,33 @@ const REFRESH_TOKEN_KEY = 'refresh_token'
 const TOKEN_EXPIRES_AT_KEY = 'token_expires_at'
 
 export const getStoredTokens = () => {
-  const accessToken = Taro.getStorageSync(ACCESS_TOKEN_KEY)
-  const refreshToken = Taro.getStorageSync(REFRESH_TOKEN_KEY)
-  const expiresAt = Number(Taro.getStorageSync(TOKEN_EXPIRES_AT_KEY))
+  const unwrapStorageValue = (value: unknown) => {
+    if (value && typeof value === 'object' && 'data' in value) {
+      return (value as { data?: unknown }).data ?? ''
+    }
+
+    if (typeof value === 'string') {
+      try {
+        const parsed = JSON.parse(value) as { data?: unknown }
+        if (parsed && typeof parsed === 'object' && 'data' in parsed) {
+          return parsed.data ?? ''
+        }
+      } catch {
+        return value
+      }
+    }
+
+    return value
+  }
+
+  const accessToken = unwrapStorageValue(Taro.getStorageSync(ACCESS_TOKEN_KEY))
+  const refreshToken = unwrapStorageValue(Taro.getStorageSync(REFRESH_TOKEN_KEY))
+  const expiresAt = unwrapStorageValue(Taro.getStorageSync(TOKEN_EXPIRES_AT_KEY))
 
   return {
     accessToken: typeof accessToken === 'string' ? accessToken : '',
     refreshToken: typeof refreshToken === 'string' ? refreshToken : '',
-    expiresAt: Number.isFinite(expiresAt) ? expiresAt : 0
+    expiresAt: typeof expiresAt === 'number' ? expiresAt : Number(expiresAt) || 0
   }
 }
 
