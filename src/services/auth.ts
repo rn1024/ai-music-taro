@@ -5,7 +5,12 @@ import type { AuthLoginResponse, AuthTokens } from '../types/api'
 export const ensureWeappLogin = async () => {
   const { accessToken, expiresAt } = getStoredTokens()
   if (accessToken && (!expiresAt || expiresAt > Date.now())) {
-    return null
+    try {
+      await request({ url: '/users/current' })
+      return null
+    } catch (error) {
+      clearTokens()
+    }
   }
 
   const loginResult =

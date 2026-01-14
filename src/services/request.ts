@@ -8,7 +8,17 @@ const ACCESS_TOKEN_KEY = 'access_token'
 const REFRESH_TOKEN_KEY = 'refresh_token'
 const TOKEN_EXPIRES_AT_KEY = 'token_expires_at'
 
+const cachedTokens = {
+  accessToken: '',
+  refreshToken: '',
+  expiresAt: 0
+}
+
 export const getStoredTokens = () => {
+  if (cachedTokens.accessToken) {
+    return { ...cachedTokens }
+  }
+
   const unwrapStorageValue = (value: unknown) => {
     if (value && typeof value === 'object' && 'data' in value) {
       return (value as { data?: unknown }).data ?? ''
@@ -32,21 +42,28 @@ export const getStoredTokens = () => {
   const refreshToken = unwrapStorageValue(Taro.getStorageSync(REFRESH_TOKEN_KEY))
   const expiresAt = unwrapStorageValue(Taro.getStorageSync(TOKEN_EXPIRES_AT_KEY))
 
-  return {
-    accessToken: typeof accessToken === 'string' ? accessToken : '',
-    refreshToken: typeof refreshToken === 'string' ? refreshToken : '',
-    expiresAt: typeof expiresAt === 'number' ? expiresAt : Number(expiresAt) || 0
-  }
+  cachedTokens.accessToken = typeof accessToken === 'string' ? accessToken : ''
+  cachedTokens.refreshToken = typeof refreshToken === 'string' ? refreshToken : ''
+  cachedTokens.expiresAt =
+    typeof expiresAt === 'number' ? expiresAt : Number(expiresAt) || 0
+
+  return { ...cachedTokens }
 }
 
 export const saveTokens = (tokens: AuthTokens) => {
   const expiresAt = Date.now() + tokens.expires_in * 1000
+  cachedTokens.accessToken = tokens.access_token
+  cachedTokens.refreshToken = tokens.refresh_token
+  cachedTokens.expiresAt = expiresAt
   Taro.setStorageSync(ACCESS_TOKEN_KEY, tokens.access_token)
   Taro.setStorageSync(REFRESH_TOKEN_KEY, tokens.refresh_token)
   Taro.setStorageSync(TOKEN_EXPIRES_AT_KEY, expiresAt)
 }
 
 export const clearTokens = () => {
+  cachedTokens.accessToken = ''
+  cachedTokens.refreshToken = ''
+  cachedTokens.expiresAt = 0
   Taro.removeStorageSync(ACCESS_TOKEN_KEY)
   Taro.removeStorageSync(REFRESH_TOKEN_KEY)
   Taro.removeStorageSync(TOKEN_EXPIRES_AT_KEY)
@@ -78,7 +95,7 @@ const refreshAccessToken = async (refreshToken: string) => {
 
 export type RequestOptions = {
   url: string
-  method?: Taro.request.Method
+  method?: string
   data?: Record<string, any>
   header?: Record<string, string>
   auth?: boolean
@@ -93,12 +110,16 @@ export const request = async <T>(options: RequestOptions): Promise<T> => {
     ...(auth && accessToken ? { Authorization: `Bearer ${accessToken}` } : {})
   }
 
-  const response = await Taro.request<ApiResponse<T>>({
+  const rawRequestOptions = {
     url: buildUrl(options.url),
     method: options.method ?? 'GET',
     data: options.data,
     header: headers
-  })
+  }
+
+  const response = await Taro.request<ApiResponse<T>>(
+    rawRequestOptions as unknown as Parameters<typeof Taro.request>[0]
+  )
 
   const responseData = response.data
   const needsRefresh = response.statusCode === 401 || responseData?.code === 401
