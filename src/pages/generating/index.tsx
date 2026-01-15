@@ -1,6 +1,6 @@
 import { View, Text, Image } from '@tarojs/components'
 import Taro from '@tarojs/taro'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { getMusicTask } from '../../services/music'
 import type { MusicTask } from '../../types'
 import { minimizeIcon, xIcon, checkIcon } from '../../assets/icons'
@@ -20,10 +20,21 @@ const statusToStepIndex = (status?: string) => {
   return 0
 }
 
+const PROGRESS_RANGES: Record<string, { min: number; max: number }> = {
+  queued: { min: 0, max: 8 },
+  composing: { min: 10, max: 45 },
+  arranging: { min: 45, max: 70 },
+  mixing: { min: 70, max: 95 }
+}
+
 export default function Generating() {
   const [currentStepIndex, setCurrentStepIndex] = useState(0)
   const [task, setTask] = useState<MusicTask | null>(null)
+  const [displayStatus, setDisplayStatus] = useState<MusicTask['status']>('queued')
+  const [displayProgress, setDisplayProgress] = useState(0)
+  const [headerStyle, setHeaderStyle] = useState<{ paddingTop: string } | null>(null)
   const taskId = Taro.getCurrentInstance().router?.params?.task_id
+  const progressRange = useMemo(() => PROGRESS_RANGES[displayStatus] ?? { min: 0, max: 8 }, [displayStatus])
 
   useEffect(() => {
     if (!taskId) {
@@ -33,11 +44,16 @@ export default function Generating() {
 
     let isActive = true
     let timer: ReturnType<typeof setInterval> | null = null
+    let redirectTimer: ReturnType<typeof setTimeout> | null = null
 
     const stopPolling = () => {
       if (timer) {
         clearInterval(timer)
         timer = null
+      }
+      if (redirectTimer) {
+        clearTimeout(redirectTimer)
+        redirectTimer = null
       }
     }
 
@@ -48,10 +64,20 @@ export default function Generating() {
 
         setTask(data)
         setCurrentStepIndex(statusToStepIndex(data.status))
+        setDisplayStatus(data.status)
+        setDisplayProgress((prev) => {
+          const range = PROGRESS_RANGES[data.status] ?? { min: 0, max: 8 }
+          const serverProgress = typeof data.progress === 'number' ? data.progress : 0
+          const next = Math.max(prev, range.min, serverProgress)
+          return Math.min(range.max, next)
+        })
 
         if (data.status === 'done' && data.result_id) {
           stopPolling()
-          Taro.redirectTo({ url: `/pages/result/index?music_id=${data.result_id}` })
+          setDisplayProgress(100)
+          redirectTimer = setTimeout(() => {
+            Taro.redirectTo({ url: `/pages/result/index?music_id=${data.result_id}&preview=1` })
+          }, 800)
         }
 
         if (data.status === 'failed') {
@@ -74,6 +100,38 @@ export default function Generating() {
     }
   }, [taskId])
 
+  useEffect(() => {
+    if (Taro.getEnv() !== Taro.ENV_TYPE.WEAPP) {
+      return
+    }
+
+    try {
+      const info = Taro.getSystemInfoSync()
+      const menu = Taro.getMenuButtonBoundingClientRect?.()
+      const safeTop = menu?.top ?? info.safeArea?.top ?? info.statusBarHeight ?? 0
+      const basePadding = 24
+      setHeaderStyle({ paddingTop: `${safeTop + basePadding}px` })
+    } catch {
+      setHeaderStyle(null)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (displayStatus === 'done' || displayStatus === 'failed') {
+      return
+    }
+
+    const timer = setInterval(() => {
+      setDisplayProgress((prev) => {
+        if (prev >= progressRange.max) return prev
+        const step = displayStatus === 'queued' ? 2 : 3
+        return Math.min(progressRange.max, Math.max(progressRange.min, prev + step))
+      })
+    }, 700)
+
+    return () => clearInterval(timer)
+  }, [displayStatus, progressRange])
+
   const handleMinimize = () => {
     Taro.showToast({ title: '最小化功能开发中', icon: 'none' })
   }
@@ -93,7 +151,7 @@ export default function Generating() {
   return (
     <View className="generating-page">
       {/* Header Actions - 原版: Minimize + Close */}
-      <View className="header-actions">
+      <View className="header-actions" style={headerStyle ?? undefined}>
         <View className="action-btn" onClick={handleMinimize}>
           <Image src={minimizeIcon} className="action-icon" mode="aspectFit" />
         </View>
@@ -120,7 +178,7 @@ export default function Generating() {
 
         {/* Status Text - 原版 */}
         <Text className="status-text">{STEPS[currentStepIndex]?.label ?? '排队中...'}</Text>
-        {task?.progress ? <Text className="status-text">{task.progress}%</Text> : null}
+        {task ? <Text className="status-text">{displayProgress}%</Text> : null}
 
         {/* Stepper - 原版: vertical with checkmarks */}
         <View className="stepper">

@@ -4,13 +4,16 @@ export default defineAppConfig({
     'pages/create/index',
     'pages/history/index',
     'pages/me/index',
+    'pages/profile-edit/index',
+    'pages/likes/index',
+    'pages/favorites/index',
     'pages/redeem/index',
     'pages/generating/index',
     'pages/result/index',
     'pages/hot-samples/index'
   ],
   tabBar: {
-    color: 'rgba(255,255,255,0.4)',
+    color: '#ffffff',
     selectedColor: '#fd429c',
     backgroundColor: '#0a0a0a',
     borderStyle: 'black',

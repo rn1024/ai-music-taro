@@ -5,35 +5,6 @@
   background: $color-page;
   padding-bottom: 200rpx;
 
-  // Header - 按原版: px-6 pt-4 pb-2 flex justify-between items-center
-  .discovery-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 32rpx 48rpx 16rpx;
-
-    .header-title {
-      font-size: 48rpx;
-      font-weight: $font-weight-bold;
-      color: $color-text-primary;
-    }
-
-    .header-icon-wrap {
-      width: 72rpx;
-      height: 72rpx;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.05);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .header-icon {
-      width: 36rpx;
-      height: 36rpx;
-    }
-  }
-
   // Banner - 按原版
   .banner-section {
     padding: 0 32rpx;

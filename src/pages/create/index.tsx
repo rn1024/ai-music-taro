@@ -1,10 +1,10 @@
 import { View, Text, Textarea, Input, ScrollView, Picker, Image } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { useState } from 'react'
-import { ModeSwitcher, PrimaryButton, CollapsibleSection } from '../../components'
+import { ModeSwitcher, PrimaryButton, CollapsibleSection, PageHeader } from '../../components'
 import { createMusic, savePrompt, uploadReferenceAudio } from '../../services/music'
 import type { CreateMode, MusicCreateRequest } from '../../types'
-import { uploadIcon, micIcon, musicIcon, trash2Icon, userIcon, copyIcon, rotateCcwIcon, saveIcon, sparklesIcon, chevronRightIcon } from '../../assets/icons'
+import { uploadIcon, micIcon, musicIcon, trash2Icon, userIcon, copyIcon, rotateCcwIcon, saveIcon, createIcon, chevronRightIcon } from '../../assets/icons'
 import './index.scss'
 
 // 原版灵感标签 - 完全保留
@@ -37,7 +37,6 @@ const CUSTOM_STYLE_TAGS = [
 
 export default function Create() {
   const [mode, setMode] = useState<CreateMode>('basic')
-
   // === 简易模式状态 ===
   const [description, setDescription] = useState('')
   const [isInstrumental, setIsInstrumental] = useState(false)
@@ -437,6 +436,8 @@ export default function Create() {
 
   return (
     <View className="create-page">
+      <PageHeader title="创作" icon={createIcon} />
+
       {/* 模式切换 */}
       <View className="mode-header">
         <ModeSwitcher value={mode} onChange={setMode} />

@@ -50,18 +50,21 @@
 
     .redeem-input {
       width: 100%;
-      padding: 24rpx 24rpx;
+      height: 88rpx;
+      padding: 0 24rpx;
       border-radius: $radius-lg;
       background: rgba(255, 255, 255, 0.08);
       border: 2rpx solid rgba(255, 255, 255, 0.15);
       color: $color-text-primary;
       font-size: 30rpx;
       box-sizing: border-box;
-      display: flex;
-      align-items: center;
+      line-height: 88rpx;
 
       input,
       .taro-input {
+        height: 100%;
+        line-height: 88rpx;
+        padding: 0;
         background: transparent !important;
         color: #fff !important;
       }

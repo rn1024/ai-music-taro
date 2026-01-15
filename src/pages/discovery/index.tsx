@@ -1,7 +1,7 @@
 import { View, Text, Image, ScrollView } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { useEffect, useState } from 'react'
-import { GlassCard } from '../../components'
+import { GlassCard, PageHeader } from '../../components'
 import { getCategories, getHotSamples } from '../../services/discovery'
 import { shareMusic } from '../../services/music'
 import type { Category, HotSample } from '../../types'
@@ -103,12 +103,7 @@ export default function Discovery() {
   return (
     <ScrollView className="discovery-page" scrollY>
       {/* Header - 完全按原版 */}
-      <View className="discovery-header">
-        <Text className="header-title">发现</Text>
-        <View className="header-icon-wrap">
-          <Image src={sparklesIcon} className="header-icon" mode="aspectFit" />
-        </View>
-      </View>
+      <PageHeader title="发现" icon={sparklesIcon} />
 
       {/* Banner - 完全按原版 */}
       <View className="banner-section">

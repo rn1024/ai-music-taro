@@ -70,6 +70,8 @@ export interface MusicVariant {
   id: string
   title: string
   cover: string
+  duration: number
+  bpm: number
 }
 
 // 用户信息
@@ -79,6 +81,36 @@ export interface UserInfo {
   avatar: string
   isPro: boolean
   credits: number
+}
+
+// 歌词时间戳数据
+export interface LyricWord {
+  word: string
+  start: number
+  end: number
+}
+
+// 歌词数据
+export interface LyricsData {
+  id: string
+  audioId: string
+  isInstrumental: boolean
+  words: LyricWord[]
+}
+
+// 歌词 API 响应
+export interface LyricsResponse {
+  music_id: string
+  lyrics: LyricsData[]
+}
+
+// 歌词汇总信息
+export interface LyricsSummary {
+  music_id: string
+  hasLyrics: boolean
+  hasInstrumental: boolean
+  totalTracks: number
+  processedAt?: string
 }
 
 export * from './api'

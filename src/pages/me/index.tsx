@@ -5,7 +5,7 @@ import { GlassCard, PrimaryButton } from '../../components'
 import { getCreditBalance } from '../../services/credits'
 import { getCurrentUser } from '../../services/user'
 import type { UserProfile } from '../../types'
-import { userIcon, creditCardIcon, giftIcon, circleHelpIcon, settingsIcon, chevronRightIcon } from '../../assets/icons'
+import { userIcon, creditCardIcon, giftIcon, circleHelpIcon, settingsIcon, chevronRightIcon, heartIcon, saveIcon, musicIcon } from '../../assets/icons'
 import './index.scss'
 
 interface MenuItemProps {
@@ -63,16 +63,36 @@ export default function Me() {
     Taro.showToast({ title: `${label}功能开发中`, icon: 'none' })
   }
 
+  const handleEditProfile = () => {
+    Taro.navigateTo({ url: '/pages/profile-edit/index' })
+  }
+
+  const handleLikes = () => {
+    Taro.navigateTo({ url: '/pages/likes/index' })
+  }
+
+  const handleFavorites = () => {
+    Taro.navigateTo({ url: '/pages/favorites/index' })
+  }
+
+  const handleHistory = () => {
+    Taro.switchTab({ url: '/pages/history/index' })
+  }
+
   return (
     <View className="me-page">
       <ScrollView className="me-scroll" scrollY>
         {/* User Card - 原版 */}
-        <View className="user-card">
+        <View className="user-card" onClick={handleEditProfile}>
           <View className="avatar-wrap">
             <View className="avatar">
-              <Image src={userIcon} className="avatar-icon" mode="aspectFit" />
+              <Image
+                src={user?.avatar || userIcon}
+                className={user?.avatar ? 'avatar-image' : 'avatar-icon'}
+                mode="aspectFill"
+              />
             </View>
-            {user?.isPro ? (
+            {user?.is_pro ? (
               <View className="pro-badge">
                 <Text>PRO</Text>
               </View>
@@ -105,6 +125,10 @@ export default function Me() {
 
         {/* Menu List - 原版 */}
         <View className="menu-list">
+          <MenuItem icon={userIcon} label="编辑资料" onClick={handleEditProfile} />
+          <MenuItem icon={heartIcon} label="我的点赞" onClick={handleLikes} />
+          <MenuItem icon={saveIcon} label="我的收藏" onClick={handleFavorites} />
+          <MenuItem icon={musicIcon} label="我的创作" onClick={handleHistory} />
           <MenuItem icon={creditCardIcon} label="消费记录" onClick={() => handleMenuClick('消费记录')} />
           <MenuItem icon={giftIcon} label="兑换码兑换" onClick={handleRedeem} />
           <MenuItem icon={circleHelpIcon} label="使用指引" onClick={() => handleMenuClick('使用指引')} />

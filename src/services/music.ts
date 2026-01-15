@@ -1,6 +1,7 @@
 import { request } from './request'
 import type {
   DeleteResponse,
+  LyricsResponse,
   MusicCreateRequest,
   MusicHistoryItem,
   MusicResult,
@@ -72,8 +73,11 @@ export const getMusicHistory = (params?: { page?: number; perPage?: number; stat
   const query = new URLSearchParams()
   if (params?.page) query.set('page', String(params.page))
   if (params?.perPage) query.set('perPage', String(params.perPage))
-  if (params?.status) query.set('status', params.status)
+  if (params?.status) query.set('status', String(params.status))
   const suffix = query.toString() ? `?${query.toString()}` : ''
 
   return request<PaginatedData<MusicHistoryItem>>({ url: `/music/history${suffix}` })
 }
+
+export const getMusicLyrics = (musicId: string) =>
+  request<LyricsResponse>({ url: `/music/${musicId}/lyrics` })

@@ -35,10 +35,15 @@ export interface UserProfile {
   nickname: string
   avatar: string
   phone: string | null
-  isPro: boolean
+  gender: number
+  birthday: string | null
+  province: string | null
+  city: string | null
+  register_source: string
+  last_login_at: string | null
+  is_pro: boolean
   credits: number
   created_at: string
-  updated_at: string
 }
 
 export interface CreditBalance {
@@ -159,4 +164,63 @@ export interface DeleteResponse {
 export interface LikeResponse {
   liked: boolean
   likes: number
+}
+
+export interface FavoriteTargetMusic {
+  id: string
+  title: string
+  cover: string
+  audio_url: string
+  duration: number
+}
+
+export interface FavoriteTargetSample {
+  id: string
+  title: string
+  author: string
+  cover: string
+  duration: number
+  likes: number
+  tag?: string
+}
+
+export interface FavoriteItem {
+  id: string
+  target_type: 'music' | 'sample'
+  target_id: string
+  created_at: string
+  target: FavoriteTargetMusic | FavoriteTargetSample | null
+}
+
+export interface FavoritesToggleResponse {
+  favorited: boolean
+}
+
+export interface FavoritesCheckResponse {
+  favorited: boolean
+}
+
+export interface UserProfileUpdateResponse {
+  id: string
+  nickname: string
+  avatar: string
+  gender: number
+  birthday: string | null
+}
+
+export interface WeappProfileResponse {
+  nickname: string
+  avatar: string
+  gender: number
+  province: string
+  city: string
+  unionid?: string
+  openid?: string
+}
+
+export interface UserLikeItem {
+  id: string
+  sample_id: string
+  created_at: string
+  sample: FavoriteTargetSample | null
 }

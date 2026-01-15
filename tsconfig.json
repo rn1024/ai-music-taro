@@ -23,7 +23,7 @@
       "@/*": ["./src/*"]
     },
     "baseUrl": ".",
-    "typeRoots": ["node_modules/@types"]
+    "typeRoots": ["node_modules/@types", "./src/types"]
   },
   "include": ["src/**/*", "types/**/*"],
   "exclude": ["node_modules", "dist"]

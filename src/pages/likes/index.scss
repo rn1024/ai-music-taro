@@ -1,0 +1,24 @@
+@use '../../styles/theme.scss' as *;
+
+.likes-page {
+  min-height: 100vh;
+  background: $color-page;
+
+  .likes-scroll {
+    height: 100vh;
+    padding: 32rpx 24rpx 200rpx;
+  }
+
+  .likes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24rpx;
+  }
+
+  .empty-state {
+    padding: 120rpx 0;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 28rpx;
+  }
+}

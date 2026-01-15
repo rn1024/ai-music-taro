@@ -1,10 +1,11 @@
-import { View, Text, ScrollView, Input, Image } from '@tarojs/components'
+import { View, Text, ScrollView, Image } from '@tarojs/components'
 import Taro from '@tarojs/taro'
-import { useEffect, useMemo, useState } from 'react'
-import { GlassCard } from '../../components'
-import { deleteMusic, getMusicHistory } from '../../services/music'
+import { useEffect, useState } from 'react'
+import { GlassCard, PageHeader } from '../../components'
+import { deleteMusic, getMusicHistory, getMusicResult } from '../../services/music'
 import type { MusicHistoryItem } from '../../types'
-import { searchIcon, clockIcon, playIcon, ellipsisIcon } from '../../assets/icons'
+import { clockIcon, playIcon, pauseIcon, ellipsisIcon, historyIcon } from '../../assets/icons'
+import { getAudioContext, toggleAudio } from '../../utils/audio'
 import './index.scss'
 
 const FILTERS = ['全部', '成功', '生成中', '失败']
@@ -26,8 +27,37 @@ const formatDate = (date: string) => date.slice(0, 10)
 
 export default function History() {
   const [activeFilter, setActiveFilter] = useState(0)
-  const [searchText, setSearchText] = useState('')
   const [history, setHistory] = useState<MusicHistoryItem[]>([])
+  const [playingId, setPlayingId] = useState<string | null>(null)
+  const [audioMap, setAudioMap] = useState<Record<string, string>>({})
+
+  useEffect(() => {
+    let audio: ReturnType<typeof getAudioContext> | null = null
+    try {
+      audio = getAudioContext()
+    } catch {
+      return
+    }
+
+    if (!audio) {
+      return
+    }
+    const handleStop = () => setPlayingId(null)
+    const handleError = () => {
+      setPlayingId(null)
+      Taro.showToast({ title: '播放失败', icon: 'none' })
+    }
+
+    audio.onEnded(handleStop)
+    audio.onStop(handleStop)
+    audio.onError(handleError)
+
+    return () => {
+      audio.offEnded(handleStop)
+      audio.offStop(handleStop)
+      audio.offError(handleError)
+    }
+  }, [])
 
   useEffect(() => {
     const fetchHistory = async () => {
@@ -43,12 +73,6 @@ export default function History() {
     fetchHistory()
   }, [activeFilter])
 
-  const filteredHistory = useMemo(() => {
-    if (!searchText.trim()) return history
-    const keyword = searchText.trim().toLowerCase()
-    return history.filter((item) => item.title.toLowerCase().includes(keyword))
-  }, [history, searchText])
-
   const handleItemClick = (item: MusicHistoryItem) => {
     if (item.status === 'success') {
       Taro.navigateTo({ url: `/pages/result/index?music_id=${item.id}` })
@@ -57,7 +81,34 @@ export default function History() {
 
   const handlePlay = (e: any, item: MusicHistoryItem) => {
     e.stopPropagation()
-    Taro.showToast({ title: `播放: ${item.title}`, icon: 'none' })
+    if (item.status !== 'success') {
+      Taro.showToast({ title: '仅支持播放已完成作品', icon: 'none' })
+      return
+    }
+
+    const play = async () => {
+      try {
+        let audioUrl = audioMap[item.id]
+        if (!audioUrl) {
+          const detail = await getMusicResult(item.id)
+          audioUrl = detail.audio_url
+          setAudioMap((prev) => ({ ...prev, [item.id]: audioUrl }))
+        }
+
+        if (!audioUrl) {
+          Taro.showToast({ title: '暂无音频地址', icon: 'none' })
+          return
+        }
+
+        const result = await toggleAudio(audioUrl)
+        setPlayingId(result.playing ? item.id : null)
+      } catch (error) {
+        setPlayingId(null)
+        Taro.showToast({ title: '播放失败', icon: 'none' })
+      }
+    }
+
+    play()
   }
 
   const handleMore = (e: any, item: MusicHistoryItem) => {
@@ -86,21 +137,8 @@ export default function History() {
 
   return (
     <View className="history-page">
+      <PageHeader title="历史" icon={historyIcon} />
       <ScrollView className="history-scroll" scrollY>
-        {/* Search Bar */}
-        <View className="search-bar">
-          <Image src={searchIcon} className="search-icon" mode="aspectFit" />
-          <Input
-            type="text"
-            placeholder="搜索历史记录..."
-            placeholderStyle="color: rgba(255, 255, 255, 0.4)"
-            style={{ background: 'transparent', color: '#fff' }}
-            className="search-input"
-            value={searchText}
-            onInput={(e) => setSearchText(e.detail.value)}
-          />
-        </View>
-
         {/* Filters */}
         <View className="filters-wrap">
           {FILTERS.map((f, i) => (
@@ -116,7 +154,7 @@ export default function History() {
 
         {/* List */}
         <View className="history-list">
-          {filteredHistory.map((item) => (
+          {history.map((item) => (
             <GlassCard
               key={item.id}
               className="history-item"
@@ -147,7 +185,11 @@ export default function History() {
 
               <View className="item-actions">
                 <View className="action-btn play" onClick={(e) => handlePlay(e, item)}>
-                  <Image src={playIcon} className="action-icon" mode="aspectFit" />
+                  <Image
+                    src={playingId === item.id ? pauseIcon : playIcon}
+                    className="action-icon"
+                    mode="aspectFit"
+                  />
                 </View>
                 <View className="action-btn more" onClick={(e) => handleMore(e, item)}>
                   <Image src={ellipsisIcon} className="action-icon" mode="aspectFit" />
