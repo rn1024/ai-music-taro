@@ -16,7 +16,7 @@ import {
   saveActiveIcon,
   chevronRightActiveIcon
 } from '../../assets/icons'
-import { getAudioContext, toggleAudio } from '../../utils/audio'
+import { getAudioContext, getAudioState, toggleAudio } from '../../utils/audio'
 import './index.scss'
 
 const formatDuration = (seconds?: number) => {
@@ -39,6 +39,18 @@ export default function Result() {
   const isPreview = Taro.getCurrentInstance().router?.params?.preview === '1'
   const isWeapp = Taro.getEnv() === Taro.ENV_TYPE.WEAPP
 
+  // 同步全局音频播放状态（从历史列表进入时可能已在播放）
+  useEffect(() => {
+    try {
+      const audioState = getAudioState()
+      if (audioState.isPlaying) {
+        setIsPlaying(true)
+      }
+    } catch {
+      // ignore
+    }
+  }, [])
+
   useEffect(() => {
     let audio: ReturnType<typeof getAudioContext> | null = null
     try {
@@ -50,19 +62,24 @@ export default function Result() {
     if (!audio) {
       return
     }
+    const handlePlay = () => setIsPlaying(true)
     const handleStop = () => setIsPlaying(false)
     const handleError = () => {
       setIsPlaying(false)
       Taro.showToast({ title: '播放失败', icon: 'none' })
     }
 
+    audio.onPlay(handlePlay)
     audio.onEnded(handleStop)
     audio.onStop(handleStop)
+    audio.onPause(handleStop)
     audio.onError(handleError)
 
     return () => {
+      audio.offPlay(handlePlay)
       audio.offEnded(handleStop)
       audio.offStop(handleStop)
+      audio.offPause(handleStop)
       audio.offError(handleError)
     }
   }, [])
