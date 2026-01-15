@@ -117,8 +117,9 @@
 
       .item-header {
         display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
+        align-items: center;
+        gap: 12rpx;
+        max-width: 100%;
 
         .item-title {
           font-size: 32rpx;
@@ -127,6 +128,8 @@
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
+          flex-shrink: 1;
+          min-width: 0;
 
           &.failed {
             color: rgba(255, 255, 255, 0.5);
@@ -137,7 +140,7 @@
           width: 16rpx;
           height: 16rpx;
           border-radius: 50%;
-          margin-top: 12rpx;
+          flex-shrink: 0;
 
           &.success {
             background: #22c55e;

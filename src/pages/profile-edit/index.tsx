@@ -99,13 +99,6 @@ export default function ProfileEdit() {
   return (
     <View className="profile-edit-page">
       <ScrollView className="profile-scroll" scrollY>
-        <View className="profile-header">
-          <TaroText className="profile-title">编辑资料</TaroText>
-          <PrimaryButton size="sm" onClick={handleSave} loading={loading}>
-            保存
-          </PrimaryButton>
-        </View>
-
         <GlassCard className="profile-avatar" padding="none" onClick={handleSyncWeappProfile}>
           <View className="avatar-left">
             <TaroText className="label">头像</TaroText>
@@ -174,6 +167,12 @@ export default function ProfileEdit() {
               <TaroText className="value-text">{maskPhone(profile?.phone)}</TaroText>
             </View>
           </GlassCard>
+        </View>
+
+        <View className="save-button-wrap">
+          <PrimaryButton block onClick={handleSave} loading={loading}>
+            保存
+          </PrimaryButton>
         </View>
       </ScrollView>
     </View>
